@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://b7vxlg6wo5eam" path="res://scenes/levels/Uriel/yuri_game.gd" id="1_nhjq3"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_nhjq3"]
+
 [node name="YuriGame" type="Node2D" unique_id=2133409603]
 script = ExtResource("1_nhjq3")
 metadata/_edit_horizontal_guides_ = [27.0]
@@ -33,5 +35,10 @@ offset_bottom = 51.0
 theme_override_font_sizes/font_size = 64
 text = "Back to Menu
 "
+
+[node name="Yuri" type="CharacterBody2D" parent="." unique_id=1028241462]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Yuri" unique_id=1753772298]
+sprite_frames = SubResource("SpriteFrames_nhjq3")
 
 [connection signal="pressed" from="Back To Menu" to="." method="_on_back_to_menu_pressed"]
