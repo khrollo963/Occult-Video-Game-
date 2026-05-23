@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bbww7h04jw1o3"]
+
+[ext_resource type="Script" uid="uid://luj2txv4j0oj" path="res://scenes/levels/Gabriel/gabe_game.gd" id="1_bwyxd"]
+
+[node name="Gabe_Game" type="Node2D" unique_id=272267348]
+script = ExtResource("1_bwyxd")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1283572857]
+custom_minimum_size = Vector2(1280, 720)
+offset_left = 11.0
+offset_top = 70.0
+offset_right = 1291.0
+offset_bottom = 790.0
+color = Color(0, 0.023529412, 0.9098039, 1)
+
+[node name="Label" type="Label" parent="." unique_id=1763983180]
+offset_left = -13.0
+offset_top = 386.0
+offset_right = 1187.0
+offset_bottom = 474.0
+theme_override_font_sizes/font_size = 64
+text = "Gabe's Obstacle Course: Coming Soon. "
+
+[node name="Back to Menu" type="Button" parent="." unique_id=1527256303]
+offset_left = 75.0
+offset_top = 133.0
+offset_right = 506.0
+offset_bottom = 229.0
+theme_override_font_sizes/font_size = 64
+text = "Back to Menu"
+
+[connection signal="pressed" from="Back to Menu" to="." method="_on_back_to_menu_pressed"]

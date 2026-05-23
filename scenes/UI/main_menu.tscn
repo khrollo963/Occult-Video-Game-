@@ -1,5 +1,11 @@
 [gd_scene format=3 uid="uid://disqbtqphflod"]
 
+[ext_resource type="Script" uid="uid://cv86il2856qwh" path="res://scenes/UI/main_menu.gd" id="1_e2p27"]
+[ext_resource type="Texture2D" uid="uid://da0qypgtkvqpx" path="res://assets/characters/Mike.jpg" id="1_tfcbk"]
+[ext_resource type="Texture2D" uid="uid://b7gjd2etofrlq" path="res://assets/characters/Gabe.jpg" id="2_e2p27"]
+[ext_resource type="Texture2D" uid="uid://dhey6l0chdyou" path="res://assets/characters/Raph.jpg" id="3_ngj32"]
+[ext_resource type="Texture2D" uid="uid://b05cqikowgwu6" path="res://assets/characters/Yuri.jpg" id="4_bm8t2"]
+
 [node name="MainMenu" type="Control" unique_id=398300758]
 layout_mode = 3
 anchors_preset = 15
@@ -7,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_e2p27")
 metadata/_edit_horizontal_guides_ = [-25792.0]
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=689610933]
@@ -14,6 +21,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -45.0
+offset_right = 25.0
+offset_bottom = -45.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.37280384, 0.2171683, 0.5887938, 1)
@@ -26,14 +37,94 @@ offset_right = 784.0
 offset_bottom = 281.0
 theme_override_colors/font_color = Color(1, 1, 0.16470589, 1)
 theme_override_font_sizes/font_size = 72
-text = "Glory Quest
+text = "Glory Quest Arcade
+
 "
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="." unique_id=496052878]
+[node name="Start Button" type="Button" parent="." unique_id=496052878]
 layout_mode = 0
-offset_left = 490.0
-offset_top = 400.0
-offset_right = 586.0
-offset_bottom = 431.0
+offset_left = 547.0
+offset_top = 516.0
+offset_right = 643.0
+offset_bottom = 547.0
 text = "Start Game"
+
+[node name="Mike" type="TextureRect" parent="." unique_id=1040136337]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+offset_left = 904.0
+offset_top = 208.0
+offset_right = 1104.0
+offset_bottom = 408.0
+texture = ExtResource("1_tfcbk")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Gabe" type="TextureRect" parent="." unique_id=323153585]
+layout_mode = 0
+offset_left = 700.0
+offset_top = 200.0
+offset_right = 900.0
+offset_bottom = 400.0
+texture = ExtResource("2_e2p27")
+expand_mode = 1
+
+[node name="Raph" type="TextureRect" parent="." unique_id=912538334]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_left = 500.0
+offset_top = 197.0
+offset_right = 700.0
+offset_bottom = 397.0
+texture = ExtResource("3_ngj32")
+expand_mode = 1
+
+[node name="Yuri" type="TextureRect" parent="." unique_id=1028523406]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_left = 300.0
+offset_top = 199.0
+offset_right = 500.0
+offset_bottom = 399.0
+texture = ExtResource("4_bm8t2")
+expand_mode = 1
+
+[node name="Button Yuri" type="Button" parent="." unique_id=874723480]
+layout_mode = 0
+offset_left = 348.0
+offset_top = 407.0
+offset_right = 424.0
+offset_bottom = 438.0
+text = "Play Yuri"
+
+[node name="Button Gabe" type="Button" parent="." unique_id=791537702]
+layout_mode = 0
+offset_left = 745.0
+offset_top = 409.0
+offset_right = 852.0
+offset_bottom = 440.0
+text = "Play Gabe"
+
+[node name="Button Raph" type="Button" parent="." unique_id=382303632]
+layout_mode = 0
+offset_left = 554.0
+offset_top = 415.0
+offset_right = 638.0
+offset_bottom = 446.0
+text = "Play Raph"
+
+[node name="Button Mike" type="Button" parent="." unique_id=632065747]
+layout_mode = 0
+offset_left = 940.0
+offset_top = 416.0
+offset_right = 1022.0
+offset_bottom = 447.0
+text = "Play Mike
+"
+
+[connection signal="pressed" from="Start Button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Button Yuri" to="." method="_on_button_yuri_pressed"]
+[connection signal="pressed" from="Button Gabe" to="." method="_on_button_gabe_pressed"]
+[connection signal="pressed" from="Button Raph" to="." method="_on_button_raph_pressed"]
+[connection signal="pressed" from="Button Mike" to="." method="_on_button_mike_pressed"]
