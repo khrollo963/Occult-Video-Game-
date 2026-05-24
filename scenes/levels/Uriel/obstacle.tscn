@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://1dpaa7c6rjvn"]
+
+[ext_resource type="Script" uid="uid://dhtjgyykru2m4" path="res://scenes/levels/Uriel/obstacle.gd" id="1_lohlk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lohlk"]
+size = Vector2(15.25, 41.25)
+
+[node name="Obstacle" type="Area2D" unique_id=1616855834]
+script = ExtResource("1_lohlk")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=631447049]
+offset_left = -30.0
+offset_top = 83.0
+offset_right = -16.0
+offset_bottom = 131.0
+color = Color(0.61222285, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1075522899]
+position = Vector2(-24, 108)
+shape = SubResource("RectangleShape2D_lohlk")

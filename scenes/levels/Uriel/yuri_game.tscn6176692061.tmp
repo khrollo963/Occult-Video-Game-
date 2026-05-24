@@ -96,7 +96,7 @@ animations = [{
 size = Vector2(420, 69.33333)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gwkwu"]
-size = Vector2(34.16667, 64.833336)
+size = Vector2(100, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fku5m"]
 size = Vector2(1280, 20)
@@ -150,7 +150,6 @@ shape = SubResource("RectangleShape2D_3gu3o")
 [node name="Hitbox" type="Area2D" parent="Yuri" unique_id=412172929]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Yuri/Hitbox" unique_id=253052105]
-position = Vector2(-130.33333, 4.3333383)
 shape = SubResource("RectangleShape2D_gwkwu")
 
 [node name="Ground" type="StaticBody2D" parent="." unique_id=958771880]
