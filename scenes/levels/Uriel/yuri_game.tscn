@@ -1,8 +1,81 @@
 [gd_scene format=3 uid="uid://dqgpbsrhmwq84"]
 
 [ext_resource type="Script" uid="uid://b7vxlg6wo5eam" path="res://scenes/levels/Uriel/yuri_game.gd" id="1_nhjq3"]
+[ext_resource type="Script" uid="uid://dye75kp802jkt" path="res://scenes/levels/Uriel/yuri.gd" id="2_fku5m"]
+[ext_resource type="Texture2D" uid="uid://nx0ubrr1cjq3" path="res://assets/characters/Yuri Bull.png" id="2_kuobw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fku5m"]
+atlas = ExtResource("2_kuobw")
+region = Rect2(0, 0, 149, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwkwu"]
+atlas = ExtResource("2_kuobw")
+region = Rect2(149, 0, 149, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6o5dd"]
+atlas = ExtResource("2_kuobw")
+region = Rect2(298, 0, 149, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q00ky"]
+atlas = ExtResource("2_kuobw")
+region = Rect2(447, 0, 149, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfjsl"]
+atlas = ExtResource("2_kuobw")
+region = Rect2(0, 96, 149, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cyddo"]
+atlas = ExtResource("2_kuobw")
+region = Rect2(149, 96, 149, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_850o8"]
+atlas = ExtResource("2_kuobw")
+region = Rect2(298, 96, 149, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwn2y"]
+atlas = ExtResource("2_kuobw")
+region = Rect2(447, 96, 149, 96)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nhjq3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kuobw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fku5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gwkwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6o5dd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q00ky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfjsl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cyddo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_850o8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwn2y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3gu3o"]
+size = Vector2(420, 69.33333)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fku5m"]
+size = Vector2(1280, 20)
 
 [node name="YuriGame" type="Node2D" unique_id=2133409603]
 script = ExtResource("1_nhjq3")
@@ -37,8 +110,31 @@ text = "Back to Menu
 "
 
 [node name="Yuri" type="CharacterBody2D" parent="." unique_id=1028241462]
+position = Vector2(300, 100)
+scale = Vector2(3, 3)
+script = ExtResource("2_fku5m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Yuri" unique_id=1753772298]
+position = Vector2(-117.589325, 4.0687714)
 sprite_frames = SubResource("SpriteFrames_nhjq3")
+frame = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Yuri" unique_id=73849728]
+position = Vector2(113.666664, 170.66667)
+shape = SubResource("RectangleShape2D_3gu3o")
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=958771880]
+position = Vector2(640, 600)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=370666729]
+position = Vector2(0, 500)
+shape = SubResource("RectangleShape2D_fku5m")
+
+[node name="ColorRect" type="ColorRect" parent="Ground" unique_id=1510391712]
+offset_left = -620.0
+offset_top = 17.0
+offset_right = 660.0
+offset_bottom = 37.0
+color = Color(0.98038715, 4.9574674e-06, 1.92523e-06, 1)
 
 [connection signal="pressed" from="Back To Menu" to="." method="_on_back_to_menu_pressed"]
