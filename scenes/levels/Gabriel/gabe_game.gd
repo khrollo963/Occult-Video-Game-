@@ -1,4 +1,7 @@
 extends Node2D
 
-func _on_back_to_menu_pressed():
-	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
+# This scene root should NOT handle player logic.
+# Only use this for global setup if needed.
+
+func _ready():
+	print("Level loaded successfully")

@@ -92,16 +92,11 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3gu3o"]
-size = Vector2(420, 69.33333)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gwkwu"]
-size = Vector2(34.16667, 64.833336)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fku5m"]
-size = Vector2(1280, 20)
+size = Vector2(82.00002, 61.131523)
 
 [node name="YuriGame" type="Node2D" unique_id=2133409603]
+position = Vector2(-2, 0)
 script = ExtResource("1_nhjq3")
 metadata/_edit_horizontal_guides_ = [27.0]
 
@@ -109,17 +104,19 @@ metadata/_edit_horizontal_guides_ = [27.0]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 1280.0
-offset_bottom = 720.0
+offset_left = 33.0
+offset_top = 36.0
+offset_right = 1313.0
+offset_bottom = 756.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 1, 0, 1)
 
 [node name="Title" type="Label" parent="." unique_id=1444638715]
-offset_left = 310.0
-offset_top = 270.0
-offset_right = 1042.0
-offset_bottom = 603.0
+offset_left = 242.0
+offset_top = 238.0
+offset_right = 974.0
+offset_bottom = 571.0
 theme_override_font_sizes/font_size = 48
 text = "Yuri's Endless Run Coming soon
 "
@@ -139,36 +136,19 @@ scale = Vector2(3, 3)
 script = ExtResource("2_fku5m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Yuri" unique_id=1753772298]
-position = Vector2(-117.589325, 4.0687714)
+position = Vector2(-87.75001, 18.166672)
+scale = Vector2(0.9966443, 0.9895833)
 sprite_frames = SubResource("SpriteFrames_nhjq3")
 animation = &"walk"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Yuri" unique_id=73849728]
-position = Vector2(113.66666, 170.66669)
-shape = SubResource("RectangleShape2D_3gu3o")
+[node name="Hitbox" type="Area2D" parent="Yuri" unique_id=1001494779]
 
-[node name="Hitbox" type="Area2D" parent="Yuri" unique_id=412172929]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Yuri/Hitbox" unique_id=253052105]
-position = Vector2(-130.33333, 4.3333383)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Yuri/Hitbox" unique_id=611152063]
+position = Vector2(-95, 14.3333435)
 shape = SubResource("RectangleShape2D_gwkwu")
 
-[node name="Ground" type="StaticBody2D" parent="." unique_id=958771880]
-position = Vector2(640, 600)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=370666729]
-position = Vector2(0, 500)
-shape = SubResource("RectangleShape2D_fku5m")
-
-[node name="ColorRect" type="ColorRect" parent="Ground" unique_id=1510391712]
-offset_left = -620.0
-offset_top = 17.0
-offset_right = 660.0
-offset_bottom = 37.0
-color = Color(0.98038715, 4.9574674e-06, 1.92523e-06, 1)
-
 [node name="ObstacleSpawner" type="Timer" parent="." unique_id=1734212006]
-wait_time = 2.6999999999999997
+wait_time = 3.33
 autostart = true
 
 [connection signal="pressed" from="Back To Menu" to="." method="_on_back_to_menu_pressed"]

@@ -1,11 +1,8 @@
 [gd_scene format=3 uid="uid://bbww7h04jw1o3"]
 
 [ext_resource type="Script" uid="uid://luj2txv4j0oj" path="res://scenes/levels/Gabriel/gabe_game.gd" id="1_bwyxd"]
-[ext_resource type="Script" uid="uid://bc4p0sybmyi4a" path="res://scenes/levels/Gabriel/label.gd" id="2_2w3d0"]
-[ext_resource type="Script" uid="uid://bcowj5vo6cwnd" path="res://scenes/levels/Gabriel/back_to_menu.gd" id="2_d828r"]
 [ext_resource type="Texture2D" uid="uid://5ol6064xhxqp" path="res://assets/characters/Gabe Eagle.png" id="2_pi2rh"]
 [ext_resource type="Script" uid="uid://gc4dbmd1t714" path="res://scenes/levels/Gabriel/gabe.gd" id="2_pn752"]
-[ext_resource type="Script" uid="uid://b1jgi1e30jukh" path="res://scenes/levels/Gabriel/spawner.gd" id="4_qmd12"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pn752"]
 atlas = ExtResource("2_pi2rh")
@@ -110,13 +107,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_grvo7"]
-size = Vector2(242.125, 164.5)
+size = Vector2(60, 60)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w6fme"]
-size = Vector2(212.375, 131.9375)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2w3d0"]
-size = Vector2(1467, 385.9375)
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pn752"]
+distance = 279.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pn752"]
 size = Vector2(1478.5, 268.5)
@@ -133,10 +127,10 @@ script = ExtResource("1_bwyxd")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1283572857]
 custom_minimum_size = Vector2(1280, 720)
-offset_left = -33.0
-offset_top = 68.0
-offset_right = 1247.0
-offset_bottom = 788.0
+offset_left = 21.0
+offset_top = 75.0
+offset_right = 1301.0
+offset_bottom = 795.0
 color = Color(0, 0.023529412, 0.9098039, 1)
 
 [node name="Label" type="Label" parent="." unique_id=1763983180]
@@ -146,7 +140,6 @@ offset_right = 1224.0
 offset_bottom = 474.0
 theme_override_font_sizes/font_size = 64
 text = "Gabe's Obstacle Course: Coming Soon. "
-script = ExtResource("2_2w3d0")
 
 [node name="Back to Menu" type="Button" parent="." unique_id=1527256303]
 offset_left = 75.0
@@ -155,36 +148,37 @@ offset_right = 506.0
 offset_bottom = 229.0
 theme_override_font_sizes/font_size = 64
 text = "Back to Menu"
-script = ExtResource("2_d828r")
 
 [node name="Gabe" type="CharacterBody2D" parent="." unique_id=1246424368]
 position = Vector2(150, 33)
-collision_layer = 3
 script = ExtResource("2_pn752")
+move_speed = null
+gravity = null
+flight_force = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Gabe" unique_id=2033020696]
-position = Vector2(46.999996, 297)
-scale = Vector2(0.9716981, 1.181318)
+position = Vector2(-50, 927)
+scale = Vector2(0.9716981, 1)
 sprite_frames = SubResource("SpriteFrames_i0xcd")
 animation = &"fly"
 
-[node name="Hitbox" type="CollisionShape2D" parent="Gabe" unique_id=1598061779]
-position = Vector2(70, 302)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gabe" unique_id=1598061779]
+position = Vector2(185, 634)
 shape = SubResource("RectangleShape2D_grvo7")
-
-[node name="Attackbox" type="Area2D" parent="Gabe" unique_id=86574073]
-position = Vector2(12, 298)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Gabe/Attackbox" unique_id=1791609555]
-position = Vector2(39, -1)
-shape = SubResource("RectangleShape2D_w6fme")
 
 [node name="Ground" type="StaticBody2D" parent="." unique_id=257714940]
 position = Vector2(34, 636)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=698105581]
-position = Vector2(688, 334)
-shape = SubResource("RectangleShape2D_2w3d0")
+position = Vector2(130, 107)
+shape = SubResource("WorldBoundaryShape2D_pn752")
+
+[node name="ColorRect" type="ColorRect" parent="Ground" unique_id=1744671397]
+offset_left = -18.0
+offset_top = 152.0
+offset_right = 1262.0
+offset_bottom = 227.0
+color = Color(0.38311675, 0.09378364, 0.014593532, 1)
 
 [node name="Cieling" type="StaticBody2D" parent="." unique_id=1732242284]
 position = Vector2(0, 50)
@@ -197,7 +191,7 @@ offset_bottom = 42.0
 color = Color(0.51615185, 0.111666985, 9.62615e-08, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cieling" unique_id=1772579446]
-position = Vector2(805, -82)
+position = Vector2(739.75, -250.25)
 shape = SubResource("RectangleShape2D_pn752")
 
 [node name="Wall" type="StaticBody2D" parent="." unique_id=343007777]
@@ -225,10 +219,11 @@ offset_bottom = 805.0
 color = Color(0.51584375, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall 2 Wall" unique_id=1981457586]
-position = Vector2(-173, 466)
+position = Vector2(55.75, 497)
 shape = SubResource("RectangleShape2D_d828r")
 
-[node name="Spawner" type="Node" parent="." unique_id=1442172749]
-script = ExtResource("4_qmd12")
+[node name="ObstacleSpawner" type="Timer" parent="." unique_id=804867968]
+wait_time = 3.0
+autostart = true
 
 [connection signal="pressed" from="Back to Menu" to="." method="_on_back_to_menu_pressed"]

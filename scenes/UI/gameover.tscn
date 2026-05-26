@@ -1,35 +1,35 @@
 [gd_scene format=3 uid="uid://dsxh7rt2ntv8t"]
 
 [ext_resource type="Script" uid="uid://dpdedn0uwvwhm" path="res://scenes/UI/gameover.gd" id="1_wjqpn"]
+[ext_resource type="Script" uid="uid://y3i2nvn3m1l" path="res://scenes/UI/label.gd" id="2_bfgj2"]
+[ext_resource type="Script" uid="uid://cwb0v1hqypccb" path="res://scenes/UI/back_button.gd" id="3_bfgj2"]
 
-[node name="Gameover" type="Control" unique_id=1997427954]
-layout_mode = 3
-anchors_preset = 0
+[node name="Gameover" type="CanvasLayer" unique_id=1664239996]
 script = ExtResource("1_wjqpn")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=622374622]
-layout_mode = 0
-offset_right = 1280.0
-offset_bottom = 720.0
+offset_right = 1987.0
+offset_bottom = 935.0
 color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="." unique_id=1139642186]
-layout_mode = 0
-offset_left = 457.0
-offset_top = 337.0
-offset_right = 835.0
-offset_bottom = 428.0
+offset_left = 788.0
+offset_top = 375.0
+offset_right = 1166.0
+offset_bottom = 466.0
 theme_override_font_sizes/font_size = 66
 text = "GAME OVER"
+script = ExtResource("2_bfgj2")
 
-[node name="Try Again" type="Button" parent="." unique_id=984255621]
-layout_mode = 0
-offset_left = 571.0
-offset_top = 195.0
-offset_right = 714.0
-offset_bottom = 245.0
+[node name="Back button" type="Button" parent="." unique_id=984255621]
+offset_left = 906.0
+offset_top = 213.0
+offset_right = 1049.0
+offset_bottom = 263.0
 theme_override_font_sizes/font_size = 30
-text = "Try Again
-"
+text = "Main Menu
 
-[connection signal="pressed" from="Try Again" to="." method="_on_try_again_pressed"]
+"
+script = ExtResource("3_bfgj2")
+
+[connection signal="pressed" from="Back button" to="." method="_on_back_button_pressed"]

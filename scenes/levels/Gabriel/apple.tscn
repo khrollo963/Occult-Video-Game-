@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dupyan1c3ailu"]
+
+[ext_resource type="Script" uid="uid://c0gqh2x8njf3f" path="res://scenes/levels/Gabriel/apple.gd" id="1_6qjhf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ty0ub"]
+size = Vector2(24, 25)
+
+[node name="Apple" type="Area2D" unique_id=501888442]
+collision_mask = 2
+script = ExtResource("1_6qjhf")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1565213591]
+offset_left = 315.0
+offset_top = 201.0
+offset_right = 349.0
+offset_bottom = 238.0
+color = Color(1, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=164140416]
+position = Vector2(331, 220)
+shape = SubResource("RectangleShape2D_ty0ub")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
