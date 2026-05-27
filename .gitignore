@@ -3,3 +3,5 @@
 /android/
 *.tmp
 godot4.exe
+.venv/
+tools/output/
