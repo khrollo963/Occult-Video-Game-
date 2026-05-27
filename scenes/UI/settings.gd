@@ -42,10 +42,10 @@ Set your 3-character arcade initials below. Scores submit automatically when a r
 @onready var raph_value: Label = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/RaphRow/RaphValue
 @onready var initials_edit: LineEdit = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/InitialsRow/InitialsEdit
 @onready var initials_status: Label = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/InitialsRow/InitialsStatus
-@onready var vfx_check: CheckBox = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/VisualRow/VfxCheck
-@onready var parallax_check: CheckBox = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/VisualRow/ParallaxCheck
+@onready var vfx_check: CheckBox = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/VfxRow/VfxCheck
+@onready var parallax_check: CheckBox = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/ParallaxRow/ParallaxCheck
 @onready var how_to_play_label: RichTextLabel = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/HowToPlayLabel
-@onready var medals_label: RichTextLabel = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/MedalsLabel
+@onready var medals_list: VBoxContainer = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/MedalsList
 
 
 func _ready() -> void:
@@ -87,8 +87,20 @@ func _refresh_labels() -> void:
 
 
 func _refresh_medals() -> void:
-	var lines: PackedStringArray = _score_mgr.get_medal_lines()
-	medals_label.text = "[font_size=22][b]Medals[/b][/font_size]\n" + "\n".join(lines)
+	for child in medals_list.get_children():
+		child.queue_free()
+	for entry in _score_mgr.get_medal_entries():
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 10)
+		var icon := ColorRect.new()
+		icon.custom_minimum_size = Vector2(18, 18)
+		icon.color = Color(1.0, 0.82, 0.2, 1.0) if entry["unlocked"] else Color(0.45, 0.42, 0.55, 1.0)
+		row.add_child(icon)
+		var label := Label.new()
+		label.text = entry["label"]
+		label.modulate = Color(1.0, 0.95, 0.7) if entry["unlocked"] else Color(0.75, 0.72, 0.82)
+		row.add_child(label)
+		medals_list.add_child(row)
 
 
 func _on_background_option_item_selected(index: int) -> void:

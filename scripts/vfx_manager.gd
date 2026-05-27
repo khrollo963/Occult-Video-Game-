@@ -1,16 +1,15 @@
 extends Node
 
 const EFFECTS := {
-	"pickup_burst": "res://scenes/vfx/pickup_burst.tscn",
-	"hit_spark": "res://scenes/vfx/hit_spark.tscn",
-	"death_poof": "res://scenes/vfx/death_poof.tscn",
-	"landing_dust": "res://scenes/vfx/landing_dust.tscn",
+	"pickup_burst": preload("res://scenes/vfx/pickup_burst.tscn"),
+	"hit_spark": preload("res://scenes/vfx/hit_spark.tscn"),
+	"death_poof": preload("res://scenes/vfx/death_poof.tscn"),
+	"landing_dust": preload("res://scenes/vfx/landing_dust.tscn"),
 }
 
 
 func _ready() -> void:
 	get_node("/root/EventBus").vfx_requested.connect(_spawn_effect)
-	get_node("/root/EventBus").player_damaged.connect(func(_a): _spawn_effect("hit_spark", Vector2.ZERO))
 	get_node("/root/EventBus").collectible_picked.connect(func(_v): pass)
 	get_node("/root/EventBus").enemy_killed.connect(func(): pass)
 
@@ -24,12 +23,11 @@ func _spawn_effect(effect_id: String, global_pos: Vector2) -> void:
 		return
 	if not EFFECTS.has(effect_id):
 		return
-	var scene: PackedScene = load(EFFECTS[effect_id])
-	if scene == null:
-		return
+	var scene: PackedScene = EFFECTS[effect_id]
 	var inst := scene.instantiate()
 	var root := get_tree().current_scene
 	if root == null:
+		inst.queue_free()
 		return
 	root.add_child(inst)
 	if inst is Node2D:

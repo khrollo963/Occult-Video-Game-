@@ -35,6 +35,8 @@ func _ready() -> void:
 func load_settings() -> void:
 	var config := ConfigFile.new()
 	if config.load(SETTINGS_PATH) != OK:
+		if OS.has_feature("web"):
+			parallax_enabled = false
 		return
 
 	background_style = str(config.get_value("display", "background_style", BACKGROUND_GRADIENT))

@@ -27,9 +27,10 @@ func _ready() -> void:
 
 
 func _build_layers() -> void:
+	var layer_count := mini(2 if OS.has_feature("web") else 3, layer_colors.size())
 	for child in get_children():
 		child.queue_free()
-	for i in layer_colors.size():
+	for i in layer_count:
 		var layer := ParallaxLayer.new()
 		var sprite := ColorRect.new()
 		sprite.color = layer_colors[i]

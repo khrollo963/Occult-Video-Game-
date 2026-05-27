@@ -4,6 +4,8 @@ const SHEEN_SHADER := preload("res://assets/ui/button_sheen.gdshader")
 
 
 static func apply_to_button(button: Button) -> void:
+	if OS.has_feature("web"):
+		return
 	if button.get_node_or_null("Sheen"):
 		return
 

@@ -61,3 +61,5 @@ Button/styles/normal = SubResource("StyleBoxFlat_btn_normal")
 Label/colors/font_color = Color(0.92, 0.9, 1, 1)
 Label/font_sizes/font_size = 24
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_panel")
+CheckBox/constants/h_separation = 8
+CheckBox/constants/check_v_offset = 2

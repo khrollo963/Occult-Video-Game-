@@ -132,8 +132,18 @@ func has_medal(medal_id: String) -> bool:
 
 func get_medal_lines() -> PackedStringArray:
 	var lines: PackedStringArray = []
-	for medal_id in MEDAL_THRESHOLDS:
-		var label: String = str(MEDAL_LABELS.get(medal_id, medal_id))
-		var mark := "★" if has_medal(medal_id) else "☆"
-		lines.append("%s %s" % [mark, label])
+	for entry in get_medal_entries():
+		var mark := "*" if entry.unlocked else "-"
+		lines.append("%s %s" % [mark, entry.label])
 	return lines
+
+
+func get_medal_entries() -> Array:
+	var entries: Array = []
+	for medal_id in MEDAL_THRESHOLDS:
+		entries.append({
+			"id": medal_id,
+			"label": str(MEDAL_LABELS.get(medal_id, medal_id)),
+			"unlocked": has_medal(medal_id),
+		})
+	return entries

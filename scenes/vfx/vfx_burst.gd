@@ -5,13 +5,16 @@ extends Node2D
 @export var spread := 180.0
 @export var initial_velocity := 120.0
 
+static var _dot_texture: ImageTexture
+
 
 func _ready() -> void:
 	var particles := GPUParticles2D.new()
-	particles.amount = amount
+	var particle_amount := maxi(4, int(amount * _particle_scale()))
+	particles.amount = particle_amount
 	particles.one_shot = true
 	particles.explosiveness = 1.0
-	particles.lifetime = 0.45
+	particles.lifetime = 0.35 if _is_web() else 0.45
 	particles.emitting = true
 	particles.finished.connect(queue_free)
 
@@ -25,13 +28,21 @@ func _ready() -> void:
 	mat.scale_max = 5.0
 	mat.color = color
 	particles.process_material = mat
-
-	var tex := _make_dot_texture()
-	particles.texture = tex
+	particles.texture = _get_dot_texture()
 	add_child(particles)
 
 
-func _make_dot_texture() -> ImageTexture:
-	var img := Image.create(8, 8, false, Image.FORMAT_RGBA8)
-	img.fill(Color.WHITE)
-	return ImageTexture.create_from_image(img)
+static func _get_dot_texture() -> ImageTexture:
+	if _dot_texture == null:
+		var img := Image.create(4, 4, false, Image.FORMAT_RGBA8)
+		img.fill(Color.WHITE)
+		_dot_texture = ImageTexture.create_from_image(img)
+	return _dot_texture
+
+
+static func _is_web() -> bool:
+	return OS.has_feature("web")
+
+
+static func _particle_scale() -> float:
+	return 0.45 if _is_web() else 1.0

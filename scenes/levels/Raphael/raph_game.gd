@@ -26,7 +26,7 @@ var highest_y := 0.0
 var spawn_cursor_y := 0.0
 var gap_multiplier := 1.0
 var rng := RandomNumberGenerator.new()
-var _milestone_shown := ""
+var _milestones_reached: Dictionary = {}
 
 
 func _ready() -> void:
@@ -119,13 +119,12 @@ func _process(_delta: float) -> void:
 
 func _check_milestone(height: int) -> void:
 	for threshold in [500, 1500, 3000, 5000]:
-		if height >= threshold:
-			var plane_name: String = HEIGHT_MILESTONES[threshold]
-			if _milestone_shown != plane_name:
-				_milestone_shown = plane_name
-				_game_manager.set_stat("Plane", threshold)
-				var gradient: ColorRect = $SimpleGradientBg.get_node("Gradient")
-				gradient.top_color = Color(0.98 - threshold * 0.0001, 0.92, 0.72, 1.0)
+		if height < threshold or _milestones_reached.has(threshold):
+			continue
+		_milestones_reached[threshold] = true
+		_game_manager.set_stat("Plane", threshold)
+		var gradient: ColorRect = $SimpleGradientBg.get_node("Gradient")
+		gradient.top_color = Color(0.98 - threshold * 0.0001, 0.92, 0.72, 1.0)
 
 
 func _cleanup_platforms() -> void:
@@ -152,9 +151,11 @@ func get_player_position() -> Vector2:
 
 
 func _add_parallax() -> void:
-	var bg := ParallaxSetup.create([
+	var colors: Array[Color] = [
 		Color(0.98, 0.92, 0.72, 0.45),
 		Color(0.92, 0.78, 0.55, 0.35),
-	])
+	]
+	var bg: ParallaxSetup = ParallaxSetup.new()
+	bg.layer_colors = colors
 	add_child(bg)
 	move_child(bg, 1)

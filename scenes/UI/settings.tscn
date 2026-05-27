@@ -207,24 +207,38 @@ custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 text = ""
 
-[node name="VisualRow" type="HBoxContainer" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox"]
+[node name="VfxRow" type="HBoxContainer" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox"]
 layout_mode = 2
 
-[node name="VfxCheck" type="CheckBox" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/VisualRow"]
+[node name="VfxLabel" type="Label" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/VfxRow"]
+custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
 text = "Visual effects"
 
-[node name="ParallaxCheck" type="CheckBox" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/VisualRow"]
+[node name="VfxCheck" type="CheckBox" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/VfxRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ParallaxRow" type="HBoxContainer" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox"]
+layout_mode = 2
+
+[node name="ParallaxLabel" type="Label" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/ParallaxRow"]
+custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
 text = "Parallax layers"
 
-[node name="MedalsLabel" type="RichTextLabel" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox"]
-custom_minimum_size = Vector2(0, 120)
+[node name="ParallaxCheck" type="CheckBox" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/ParallaxRow"]
 layout_mode = 2
 size_flags_horizontal = 3
-bbcode_enabled = true
-fit_content = true
-scroll_active = false
+
+[node name="MedalsTitle" type="Label" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Medals"
+
+[node name="MedalsList" type="VBoxContainer" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
 
 [node name="HowToPlayLabel" type="RichTextLabel" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox"]
 custom_minimum_size = Vector2(0, 280)
@@ -252,7 +266,7 @@ text = "Exit"
 [connection signal="value_changed" from="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/RaphRow/RaphSlider" to="." method="_on_raph_slider_value_changed"]
 [connection signal="text_submitted" from="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/InitialsRow/InitialsEdit" to="." method="_on_initials_edit_text_submitted"]
 [connection signal="focus_exited" from="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/InitialsRow/InitialsEdit" to="." method="_on_initials_edit_focus_exited"]
-[connection signal="toggled" from="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/VisualRow/VfxCheck" to="." method="_on_vfx_check_toggled"]
-[connection signal="toggled" from="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/VisualRow/ParallaxCheck" to="." method="_on_parallax_check_toggled"]
+[connection signal="toggled" from="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/VfxRow/VfxCheck" to="." method="_on_vfx_check_toggled"]
+[connection signal="toggled" from="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/ParallaxRow/ParallaxCheck" to="." method="_on_parallax_check_toggled"]
 [connection signal="pressed" from="MarginContainer/VBox/BackButton" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="MarginContainer/VBox/ExitButton" to="." method="_on_exit_pressed"]

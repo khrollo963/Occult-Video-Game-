@@ -29,6 +29,10 @@ func setup(kind: String) -> void:
 
 
 func _add_glow_light(color: Color, energy: float) -> void:
+	if OS.has_feature("web"):
+		return
+	if not get_node("/root/SettingsManager").visual_effects_enabled:
+		return
 	if _goal_light != null:
 		return
 	_goal_light = PointLight2D.new()
