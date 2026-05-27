@@ -8,6 +8,12 @@ const SETTINGS_PATH := "user://settings.cfg"
 const BACKGROUND_GRADIENT := "gradient"
 const BACKGROUND_CLASSIC := "classic"
 
+const LEGACY_MENU := Color(0.37280384, 0.2171683, 0.5887938, 1.0)
+const LEGACY_MIKE := Color(1.0, 0.0, 0.0, 1.0)
+const LEGACY_GABE := Color(0.0, 0.023529412, 0.9098039, 1.0)
+const LEGACY_YURI := Color(0.08, 0.25, 0.12, 1.0)
+const LEGACY_RAPH := Color(1.0, 1.0, 0.2, 1.0)
+
 var background_style: String = BACKGROUND_GRADIENT
 var mike_enemy_count: int = 3
 var gabe_spawn_rate: float = 1.0
@@ -97,6 +103,23 @@ func set_raph_platform_gap(gap: float) -> void:
 	raph_platform_gap = next
 	save_settings()
 	game_options_changed.emit()
+
+
+func apply_background(root: Node, legacy_color: Color) -> void:
+	var use_classic := background_style == BACKGROUND_CLASSIC
+	var gradient := root.get_node_or_null("SimpleGradientBg")
+	var decor := root.get_node_or_null("SkyOverlay")
+	var legacy := root.get_node_or_null("LegacyBackground")
+
+	if gradient:
+		gradient.visible = not use_classic
+	if decor:
+		decor.visible = not use_classic
+	if legacy:
+		legacy.visible = use_classic
+		var fill: ColorRect = legacy.get_node_or_null("Fill")
+		if fill:
+			fill.color = legacy_color
 
 
 func _clamp_all() -> void:

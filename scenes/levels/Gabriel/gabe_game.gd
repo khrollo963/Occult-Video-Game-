@@ -24,7 +24,7 @@ func _configure_background() -> void:
 
 
 func _apply_background() -> void:
-	BackgroundApplier.apply(self, BackgroundApplier.LEGACY_GABE)
+	_settings.apply_background(self, _settings.LEGACY_GABE)
 
 
 func _add_back_button() -> void:

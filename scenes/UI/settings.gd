@@ -17,7 +17,7 @@ extends Control
 
 func _ready() -> void:
 	_configure_background()
-	BackgroundApplier.apply(self, BackgroundApplier.LEGACY_MENU)
+	_settings.apply_background(self, _settings.LEGACY_MENU)
 	_settings.background_style_changed.connect(_on_background_style_changed)
 
 	background_option.clear()
@@ -77,7 +77,7 @@ func _on_raph_slider_value_changed(value: float) -> void:
 
 
 func _on_background_style_changed(_style: String) -> void:
-	BackgroundApplier.apply(self, BackgroundApplier.LEGACY_MENU)
+	_settings.apply_background(self, _settings.LEGACY_MENU)
 
 
 func _on_back_pressed() -> void:

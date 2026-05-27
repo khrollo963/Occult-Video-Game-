@@ -40,7 +40,7 @@ func _configure_background() -> void:
 
 
 func _apply_background() -> void:
-	BackgroundApplier.apply(self, BackgroundApplier.LEGACY_RAPH)
+	_settings.apply_background(self, _settings.LEGACY_RAPH)
 
 
 func _apply_game_options() -> void:

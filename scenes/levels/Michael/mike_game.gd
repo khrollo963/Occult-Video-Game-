@@ -47,7 +47,7 @@ func _configure_background() -> void:
 
 
 func _apply_background() -> void:
-	BackgroundApplier.apply(self, BackgroundApplier.LEGACY_MIKE)
+	_settings.apply_background(self, _settings.LEGACY_MIKE)
 
 
 func _on_background_style_changed(_style: String) -> void:

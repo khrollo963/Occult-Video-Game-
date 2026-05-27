@@ -23,7 +23,7 @@ func _configure_background() -> void:
 
 
 func _apply_background() -> void:
-	BackgroundApplier.apply(self, BackgroundApplier.LEGACY_MENU)
+	_settings.apply_background(self, _settings.LEGACY_MENU)
 
 
 func start_random_game() -> void:
