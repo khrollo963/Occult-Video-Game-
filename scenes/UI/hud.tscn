@@ -1,6 +1,7 @@
-[gd_scene format=3 uid="uid://c8hudlayer001"]
+[gd_scene load_steps=3 format=3 uid="uid://c8hudlayer001"]
 
 [ext_resource type="Script" path="res://scenes/UI/hud.gd" id="1_hud"]
+[ext_resource type="Theme" uid="uid://arcade_theme001" path="res://assets/ui/arcade_theme.tres" id="2_theme"]
 
 [node name="HUD" type="CanvasLayer"]
 layer = 1
@@ -11,6 +12,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 48.0
 grow_horizontal = 2
+theme = ExtResource("2_theme")
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 16
@@ -21,16 +23,16 @@ theme_override_constants/separation = 24
 
 [node name="HealthLabel" type="Label" parent="MarginContainer/TopBar"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 26
 text = "HP: 3/3"
 
 [node name="ScoreLabel" type="Label" parent="MarginContainer/TopBar"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 26
 text = "Score: 0"
 
 [node name="StatLabel" type="Label" parent="MarginContainer/TopBar"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 26
 text = ""

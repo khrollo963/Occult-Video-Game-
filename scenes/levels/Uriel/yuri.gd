@@ -65,7 +65,7 @@ func update_animation() -> void:
 	if not is_on_floor():
 		anim.play("jump")
 	else:
-		anim.play("walk")
+		anim.play("run")
 
 
 func die() -> void:

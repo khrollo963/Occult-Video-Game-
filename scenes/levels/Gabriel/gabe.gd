@@ -129,6 +129,9 @@ func update_animation() -> void:
 	if is_lunging:
 		return
 
+	if absf(velocity.x) > 10.0:
+		anim.flip_h = velocity.x > 0.0
+
 	if not is_on_floor() or velocity.y < 0.0:
 		anim.play("fly")
 	elif absf(velocity.x) > 10.0:

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dsxh7rt2ntv8t"]
+[gd_scene load_steps=3 format=3 uid="uid://dsxh7rt2ntv8t"]
 
 [ext_resource type="Script" path="res://scenes/UI/gameover.gd" id="1_wjqpn"]
+[ext_resource type="Theme" uid="uid://arcade_theme001" path="res://assets/ui/arcade_theme.tres" id="2_theme"]
 
 [node name="Gameover" type="CanvasLayer"]
 layer = 10
@@ -20,6 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_theme")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
@@ -28,6 +30,7 @@ theme_override_constants/separation = 20
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 66
+theme_override_colors/font_color = Color(1, 0.35, 0.35, 1)
 text = "GAME OVER"
 horizontal_alignment = 1
 

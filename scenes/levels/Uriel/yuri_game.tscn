@@ -1,96 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqgpbsrhmwq84"]
+[gd_scene load_steps=8 format=3 uid="uid://dqgpbsrhmwq84"]
 
 [ext_resource type="Script" path="res://scenes/levels/Uriel/yuri_game.gd" id="1_nhjq3"]
 [ext_resource type="Script" path="res://scenes/levels/Uriel/yuri.gd" id="2_fku5m"]
-[ext_resource type="Texture2D" path="res://assets/characters/Yuri Bull.png" id="2_kuobw"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fku5m"]
-atlas = ExtResource("2_kuobw")
-region = Rect2(0, 0, 149, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_850o8"]
-atlas = ExtResource("2_kuobw")
-region = Rect2(0, 96, 149, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xwn2y"]
-atlas = ExtResource("2_kuobw")
-region = Rect2(149, 96, 149, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3gu3o"]
-atlas = ExtResource("2_kuobw")
-region = Rect2(298, 96, 149, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_syvem"]
-atlas = ExtResource("2_kuobw")
-region = Rect2(447, 96, 149, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cyddo"]
-atlas = ExtResource("2_kuobw")
-region = Rect2(149, 96, 149, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gwkwu"]
-atlas = ExtResource("2_kuobw")
-region = Rect2(149, 0, 149, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6o5dd"]
-atlas = ExtResource("2_kuobw")
-region = Rect2(298, 0, 149, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q00ky"]
-atlas = ExtResource("2_kuobw")
-region = Rect2(447, 0, 149, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cfjsl"]
-atlas = ExtResource("2_kuobw")
-region = Rect2(0, 96, 149, 96)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_nhjq3"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fku5m")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_850o8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xwn2y")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3gu3o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_syvem")
-}],
-"loop": true,
-"name": &"jump",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cyddo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gwkwu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6o5dd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q00ky")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cfjsl")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 10.0
-}]
+[ext_resource type="SpriteFrames" path="res://assets/characters/frames/yuri_bull.tres" id="3_frames"]
+[ext_resource type="PackedScene" uid="uid://bgrad001simple" path="res://scenes/UI/simple_gradient_bg.tscn" id="4_bg"]
+[ext_resource type="Theme" uid="uid://arcade_theme001" path="res://assets/ui/arcade_theme.tres" id="5_theme"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(70, 50)
@@ -101,16 +15,31 @@ size = Vector2(1400, 80)
 [node name="YuriGame" type="Node2D"]
 script = ExtResource("1_nhjq3")
 
-[node name="Background" type="ColorRect" parent="."]
-offset_right = 1280.0
-offset_bottom = 720.0
-color = Color(0.08, 0.25, 0.12, 1)
+[node name="SimpleGradientBg" parent="." instance=ExtResource("4_bg")]
+
+[node name="SkyOverlay" type="CanvasLayer" parent="."]
+layer = -9
+
+[node name="TreeA" type="ColorRect" parent="SkyOverlay"]
+offset_left = 80.0
+offset_top = 420.0
+offset_right = 130.0
+offset_bottom = 560.0
+color = Color(0.12, 0.28, 0.1, 1)
+
+[node name="TreeB" type="ColorRect" parent="SkyOverlay"]
+offset_left = 980.0
+offset_top = 400.0
+offset_right = 1040.0
+offset_bottom = 560.0
+color = Color(0.1, 0.24, 0.08, 1)
 
 [node name="BackToMenu" type="Button" parent="."]
 offset_left = 16.0
 offset_top = 16.0
-offset_right = 200.0
+offset_right = 220.0
 offset_bottom = 56.0
+theme = ExtResource("5_theme")
 text = "Back to Menu"
 
 [node name="Ground" type="StaticBody2D" parent="."]
@@ -135,7 +64,7 @@ script = ExtResource("2_fku5m")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Yuri"]
 position = Vector2(0, -20)
 scale = Vector2(2.2, 2.2)
-sprite_frames = SubResource("SpriteFrames_nhjq3")
+sprite_frames = ExtResource("3_frames")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Yuri"]

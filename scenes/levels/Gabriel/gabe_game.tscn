@@ -1,117 +1,17 @@
-[gd_scene format=3 uid="uid://bbww7h04jw1o3"]
+[gd_scene load_steps=11 format=3 uid="uid://bbww7h04jw1o3"]
 
 [ext_resource type="Script" uid="uid://luj2txv4j0oj" path="res://scenes/levels/Gabriel/gabe_game.gd" id="1_bwyxd"]
-[ext_resource type="Texture2D" uid="uid://5ol6064xhxqp" path="res://assets/characters/Gabe Eagle.png" id="2_pi2rh"]
 [ext_resource type="Script" uid="uid://gc4dbmd1t714" path="res://scenes/levels/Gabriel/gabe.gd" id="2_pn752"]
 [ext_resource type="Script" uid="uid://b1jgi1e30jukh" path="res://scenes/levels/Gabriel/spawner.gd" id="4_qmd12"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pn752"]
-atlas = ExtResource("2_pi2rh")
-region = Rect2(161, 182, 159, 91)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d828r"]
-atlas = ExtResource("2_pi2rh")
-region = Rect2(483, 273, 159, 91)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gyame"]
-atlas = ExtResource("2_pi2rh")
-region = Rect2(0, 91, 159, 91)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s7c10"]
-atlas = ExtResource("2_pi2rh")
-region = Rect2(161, 91, 159, 91)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q85hq"]
-atlas = ExtResource("2_pi2rh")
-region = Rect2(322, 273, 159, 91)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d6urg"]
-atlas = ExtResource("2_pi2rh")
-region = Rect2(483, 273, 159, 91)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oeba0"]
-atlas = ExtResource("2_pi2rh")
-region = Rect2(322, 91, 159, 91)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cups2"]
-atlas = ExtResource("2_pi2rh")
-region = Rect2(322, 182, 159, 91)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vfebd"]
-atlas = ExtResource("2_pi2rh")
-region = Rect2(483, 182, 159, 91)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3cx1h"]
-atlas = ExtResource("2_pi2rh")
-region = Rect2(0, 273, 159, 91)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_aknbw"]
-atlas = ExtResource("2_pi2rh")
-region = Rect2(161, 273, 159, 91)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rwrrf"]
-atlas = ExtResource("2_pi2rh")
-region = Rect2(161, 0, 159, 91)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_i0xcd"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pn752")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d828r")
-}],
-"loop": true,
-"name": &"attack",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gyame")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s7c10")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q85hq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d6urg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_oeba0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cups2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vfebd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3cx1h")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_aknbw")
-}],
-"loop": true,
-"name": &"fly",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rwrrf")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}]
+[ext_resource type="SpriteFrames" path="res://assets/characters/frames/gabe_eagle.tres" id="5_frames"]
+[ext_resource type="PackedScene" uid="uid://bgrad001simple" path="res://scenes/UI/simple_gradient_bg.tscn" id="6_bg"]
+[ext_resource type="Script" path="res://scenes/UI/cloud_drift.gd" id="7_cloud"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_grvo7"]
-size = Vector2(120, 80)
+size = Vector2(80, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w6fme"]
-size = Vector2(212.375, 131.9375)
+size = Vector2(120, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2w3d0"]
 size = Vector2(1280, 20)
@@ -128,10 +28,39 @@ size = Vector2(20, 720)
 [node name="Gabe_Game" type="Node2D" unique_id=272267348]
 script = ExtResource("1_bwyxd")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1283572857]
-offset_right = 1280.0
+[node name="SimpleGradientBg" parent="." instance=ExtResource("6_bg")]
+
+[node name="SkyOverlay" type="CanvasLayer" parent="."]
+layer = -9
+
+[node name="CloudLayer" type="Control" parent="SkyOverlay"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 2560.0
 offset_bottom = 720.0
-color = Color(0, 0.023529412, 0.9098039, 1)
+mouse_filter = 2
+script = ExtResource("7_cloud")
+
+[node name="CloudA" type="ColorRect" parent="SkyOverlay/CloudLayer"]
+offset_left = 120.0
+offset_top = 80.0
+offset_right = 280.0
+offset_bottom = 120.0
+color = Color(1, 1, 1, 0.35)
+
+[node name="CloudB" type="ColorRect" parent="SkyOverlay/CloudLayer"]
+offset_left = 520.0
+offset_top = 140.0
+offset_right = 720.0
+offset_bottom = 185.0
+color = Color(1, 1, 1, 0.28)
+
+[node name="CloudC" type="ColorRect" parent="SkyOverlay/CloudLayer"]
+offset_left = 900.0
+offset_top = 60.0
+offset_right = 1100.0
+offset_bottom = 105.0
+color = Color(1, 1, 1, 0.32)
 
 [node name="BackgroundArtHook" type="Node2D" parent="." unique_id=900010001]
 metadata/art_path = "res://assets/backgrounds/gabriel/"
@@ -142,18 +71,18 @@ collision_layer = 3
 script = ExtResource("2_pn752")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Gabe" unique_id=2033020696]
-scale = Vector2(0.9716981, 1.181318)
-sprite_frames = SubResource("SpriteFrames_i0xcd")
+scale = Vector2(2.2, 2.2)
+sprite_frames = ExtResource("5_frames")
 animation = &"fly"
 
 [node name="Hitbox" type="CollisionShape2D" parent="Gabe" unique_id=1598061779]
-position = Vector2(0, 20)
+position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_grvo7")
 
 [node name="Attackbox" type="Area2D" parent="Gabe" unique_id=86574073]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gabe/Attackbox" unique_id=1791609555]
-position = Vector2(40, 20)
+position = Vector2(40, 10)
 shape = SubResource("RectangleShape2D_w6fme")
 
 [node name="Ground" type="StaticBody2D" parent="." unique_id=257714940]

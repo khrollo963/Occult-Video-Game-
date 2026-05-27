@@ -16,8 +16,15 @@ var obstacle_timer := 1.5
 
 func _ready() -> void:
 	add_child(HUD_SCENE.instantiate())
+	_configure_background()
 	_game_manager.set_score(0)
 	_game_manager.set_stat("Distance", 0)
+
+
+func _configure_background() -> void:
+	var gradient: ColorRect = $SimpleGradientBg.get_node("Gradient")
+	gradient.top_color = Color(0.18, 0.42, 0.22, 1.0)
+	gradient.bottom_color = Color(0.05, 0.18, 0.1, 1.0)
 
 
 func _process(delta: float) -> void:

@@ -13,6 +13,7 @@ var level_goal: Area2D
 
 func _ready() -> void:
 	add_child(HUD_SCENE.instantiate())
+	_configure_background()
 	_game_manager.set_score(0)
 	_game_manager.set_stat("Level", 1)
 	_spawn_enemies()
@@ -32,6 +33,12 @@ func _spawn_goal() -> void:
 	level_goal.global_position = Vector2(1180, 560)
 	add_child(level_goal)
 	level_goal.level_completed.connect(_on_level_completed)
+
+
+func _configure_background() -> void:
+	var gradient: ColorRect = $SimpleGradientBg.get_node("Gradient")
+	gradient.top_color = Color(0.12, 0.18, 0.42, 1.0)
+	gradient.bottom_color = Color(0.04, 0.06, 0.18, 1.0)
 
 
 func _on_level_completed() -> void:
