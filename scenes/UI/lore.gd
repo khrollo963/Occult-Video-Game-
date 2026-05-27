@@ -17,7 +17,7 @@ The imagery behind the game is heavily religiously and mystically inspired.
 
 Each character is one of the four main archangels of praise, symbolized by a zodiac sign:
 
-[b]Raphael[/b] — Aquarius
+[b]Raphael (Raph)[/b] — Aquarius
 [b]Uriel (Yuri)[/b] — Taurus
 [b]Gabriel (Gabe)[/b] — Ancient Scorpio
 [b]Michael (Mike)[/b] — Leo
