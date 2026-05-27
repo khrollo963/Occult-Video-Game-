@@ -33,6 +33,7 @@ func _ready() -> void:
 	filter_option.add_item("Raph", 4)
 	filter_option.set_item_metadata(4, "raph")
 	_leaderboard.leaderboard_loaded.connect(_on_leaderboard_loaded)
+	_leaderboard.leaderboard_failed.connect(_on_leaderboard_failed)
 	_refresh()
 
 
@@ -50,6 +51,11 @@ func _refresh() -> void:
 	status_label.text = "Loading..."
 	var game_id: String = filter_option.get_item_metadata(filter_option.selected)
 	_leaderboard.fetch_top(game_id, 15)
+
+
+func _on_leaderboard_failed(message: String) -> void:
+	status_label.text = "Could not load scores"
+	list_label.text = "[center]%s[/center]" % message
 
 
 func _on_leaderboard_loaded(_game_id: String, entries: Array) -> void:

@@ -3,7 +3,7 @@ extends Node2D
 const HUD_SCENE := preload("res://scenes/UI/hud.tscn")
 const PLATFORM_SCENE := preload("res://scenes/levels/Raphael/raph_platform.tscn")
 const SceneNav := preload("res://scripts/scene_nav.gd")
-const ParallaxSetup := preload("res://scripts/parallax_setup.gd")
+const ParallaxSetupScript := preload("res://scripts/parallax_setup.gd")
 
 const HEIGHT_MILESTONES := {
 	500: "Yesod",
@@ -155,7 +155,7 @@ func _add_parallax() -> void:
 		Color(0.98, 0.92, 0.72, 0.45),
 		Color(0.92, 0.78, 0.55, 0.35),
 	]
-	var bg: ParallaxSetup = ParallaxSetup.new()
+	var bg: ParallaxBackground = ParallaxSetupScript.new()
 	bg.layer_colors = colors
 	add_child(bg)
 	move_child(bg, 1)

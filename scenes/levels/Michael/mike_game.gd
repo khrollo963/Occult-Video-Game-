@@ -2,7 +2,7 @@ extends Node2D
 
 const HUD_SCENE := preload("res://scenes/UI/hud.tscn")
 const SceneNav := preload("res://scripts/scene_nav.gd")
-const ParallaxSetup := preload("res://scripts/parallax_setup.gd")
+const ParallaxSetupScript := preload("res://scripts/parallax_setup.gd")
 const ENEMY_SCENE := preload("res://scenes/levels/Michael/enemy.tscn")
 const GOAL_SCENE := preload("res://scenes/levels/Michael/level_goal.tscn")
 
@@ -21,8 +21,10 @@ var _goal_x := 1180.0
 
 
 func _ready() -> void:
-	if not _game_manager.mike_advance_level:
+	var advancing: bool = _game_manager.mike_advance_level
+	if not advancing:
 		_game_manager.mike_level = 1
+		_game_manager.set_score(0)
 	else:
 		_game_manager.mike_advance_level = false
 
@@ -33,7 +35,6 @@ func _ready() -> void:
 	_apply_level_layout()
 	_settings.background_style_changed.connect(_on_background_style_changed)
 	_settings.game_options_changed.connect(_on_game_options_changed)
-	_game_manager.set_score(0)
 	var level_name: String = LEVEL_NAMES[mini(_game_manager.mike_level - 1, LEVEL_NAMES.size() - 1)]
 	_game_manager.set_stat("Level", _game_manager.mike_level)
 	status_label.text = level_name
@@ -104,8 +105,8 @@ func _on_game_options_changed() -> void:
 
 func _on_level_completed() -> void:
 	status_label.text = "Level Complete!"
-	var score: int = 1000 * int(_game_manager.mike_level)
-	_game_manager.set_score(score)
+	var bonus: int = 1000 * int(_game_manager.mike_level)
+	_game_manager.set_score(_game_manager.get_score() + bonus)
 	mike.set_physics_process(false)
 	mike.velocity = Vector2.ZERO
 	next_level_button.visible = true
@@ -121,6 +122,7 @@ func _on_next_level_pressed() -> void:
 func _on_back_to_menu_pressed() -> void:
 	_game_manager.mike_level = 1
 	_game_manager.mike_advance_level = false
+	_game_manager.set_score(0)
 	SceneNav.go("res://scenes/UI/main_menu.tscn")
 
 
@@ -129,9 +131,11 @@ func get_player_position() -> Vector2:
 
 
 func _add_parallax() -> void:
-	var bg := ParallaxSetup.create([
+	var colors: Array[Color] = [
 		Color(0.05, 0.08, 0.22, 0.8),
 		Color(0.08, 0.12, 0.28, 0.6),
-	])
+	]
+	var bg := ParallaxSetupScript.new()
+	bg.layer_colors = colors
 	add_child(bg)
 	move_child(bg, 1)

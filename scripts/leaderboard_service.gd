@@ -1,6 +1,7 @@
 extends Node
 
 signal leaderboard_loaded(game_id: String, entries: Array)
+signal leaderboard_failed(message: String)
 signal submit_finished(game_id: String, score: int, success: bool)
 
 const CONFIG_PATHS := [
@@ -38,10 +39,12 @@ func _load_config() -> void:
 		var config := ConfigFile.new()
 		if config.load(path) != OK:
 			continue
-		supabase_url = str(config.get_value("supabase", "url", "")).strip_edges()
-		supabase_key = str(config.get_value("supabase", "anon_key", "")).strip_edges()
-		if supabase_url.contains("YOUR_PROJECT") or supabase_key.contains("YOUR_ANON"):
+		var url := str(config.get_value("supabase", "url", "")).strip_edges()
+		var key := str(config.get_value("supabase", "anon_key", "")).strip_edges()
+		if url.is_empty() or key.is_empty() or url.contains("YOUR_PROJECT") or key.contains("YOUR_ANON"):
 			continue
+		supabase_url = url
+		supabase_key = key
 		break
 	enabled = not supabase_url.is_empty() and not supabase_key.is_empty()
 
@@ -97,6 +100,8 @@ func _start_fetch(game_id: String, limit: int, mode: RequestMode) -> void:
 	if not enabled:
 		if mode == RequestMode.RANK_CHECK:
 			get_node("/root/EventBus").leaderboard_ranked.emit(_rank_check_game_id, _rank_check_score, 0)
+		elif mode == RequestMode.FETCH:
+			leaderboard_failed.emit("Leaderboard is not configured in this build.")
 		else:
 			leaderboard_loaded.emit(game_id, [])
 		return
@@ -135,6 +140,8 @@ func _on_request_completed(result: int, response_code: int, _headers: PackedStri
 			_pending_score = 0
 		elif mode == RequestMode.RANK_CHECK:
 			get_node("/root/EventBus").leaderboard_ranked.emit(_rank_check_game_id, _rank_check_score, 0)
+		elif mode == RequestMode.FETCH:
+			leaderboard_failed.emit("Could not reach the leaderboard server.")
 		else:
 			leaderboard_loaded.emit(_pending_game_id, [])
 		return
@@ -153,6 +160,9 @@ func _on_request_completed(result: int, response_code: int, _headers: PackedStri
 	if response_code != 200:
 		if mode == RequestMode.RANK_CHECK:
 			get_node("/root/EventBus").leaderboard_ranked.emit(_rank_check_game_id, _rank_check_score, 0)
+		elif mode == RequestMode.FETCH:
+			var detail := body.get_string_from_utf8()
+			leaderboard_failed.emit("Leaderboard request failed (%d)." % response_code if detail.is_empty() else detail)
 		else:
 			leaderboard_loaded.emit(_pending_game_id, [])
 		return

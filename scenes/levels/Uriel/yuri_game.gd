@@ -2,7 +2,7 @@ extends Node2D
 
 const HUD_SCENE := preload("res://scenes/UI/hud.tscn")
 const SceneNav := preload("res://scripts/scene_nav.gd")
-const ParallaxSetup := preload("res://scripts/parallax_setup.gd")
+const ParallaxSetupScript := preload("res://scripts/parallax_setup.gd")
 const OBSTACLE_SCENE := preload("res://scenes/levels/Uriel/obstacle.tscn")
 const OVERHEAD_SCENE := preload("res://scenes/levels/Uriel/obstacle_overhead.tscn")
 const POWERUP_SCENE := preload("res://scenes/levels/Uriel/powerup_pickup.tscn")
@@ -178,9 +178,11 @@ func get_player_position() -> Vector2:
 
 
 func _add_parallax() -> void:
-	var bg := ParallaxSetup.create([
+	var colors: Array[Color] = [
 		Color(0.35, 0.12, 0.35, 0.5),
 		Color(0.2, 0.45, 0.22, 0.45),
-	])
+	]
+	var bg: ParallaxBackground = ParallaxSetupScript.new()
+	bg.layer_colors = colors
 	add_child(bg)
 	move_child(bg, 1)

@@ -36,7 +36,7 @@ Add these repository secrets (**Settings → Secrets and variables → Actions**
 | `SUPABASE_URL` | `https://kcbfzmiqbogxydkepevm.supabase.co` |
 | `SUPABASE_ANON_KEY` | Your project anon/publishable key |
 
-The export workflow writes `config/leaderboard.cfg` before building the Web export. If secrets are missing, the build still succeeds but the live leaderboard is disabled.
+The export workflow writes `config/leaderboard.cfg` before building the Web export. The Web export preset also lists that file in `include_filter` so Godot packs it into the build (plain `.cfg` files are not exported by default). If secrets are missing, the build still succeeds but the live leaderboard is disabled.
 
 ## MCP workflow
 
