@@ -1,5 +1,4 @@
 extends Node
-class_name GameManager
 
 signal health_changed(current: int, maximum: int)
 signal score_changed(score: int)
