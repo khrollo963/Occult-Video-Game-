@@ -37,4 +37,4 @@ func _on_background_style_changed(_style: String) -> void:
 
 
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/UI/settings.tscn")
+	get_tree().change_scene_to_file("res://scenes/UI/main_menu.tscn")

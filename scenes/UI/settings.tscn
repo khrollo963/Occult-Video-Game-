@@ -195,16 +195,6 @@ theme_override_font_sizes/font_size = 20
 text = "Yuri duck: hold S or Down arrow under overhead beams."
 autowrap_mode = 2
 
-[node name="LoreButton" type="Button" parent="MarginContainer/VBox"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Lore"
-
-[node name="AboutButton" type="Button" parent="MarginContainer/VBox"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "About"
-
 [node name="BackButton" type="Button" parent="MarginContainer/VBox"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -221,7 +211,5 @@ text = "Exit"
 [connection signal="value_changed" from="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/YuriSpeedRow/YuriSpeedSlider" to="." method="_on_yuri_speed_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/YuriObstacleRow/YuriObstacleSlider" to="." method="_on_yuri_obstacle_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/RaphRow/RaphSlider" to="." method="_on_raph_slider_value_changed"]
-[connection signal="pressed" from="MarginContainer/VBox/LoreButton" to="." method="_on_lore_pressed"]
-[connection signal="pressed" from="MarginContainer/VBox/AboutButton" to="." method="_on_about_pressed"]
 [connection signal="pressed" from="MarginContainer/VBox/BackButton" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="MarginContainer/VBox/ExitButton" to="." method="_on_exit_pressed"]

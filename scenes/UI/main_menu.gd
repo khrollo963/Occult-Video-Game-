@@ -6,6 +6,7 @@ const GAME_SCENES := [
 	"res://scenes/levels/Uriel/yuri_game.tscn",
 	"res://scenes/levels/Raphael/raph_game.tscn",
 ]
+const ButtonSheen := preload("res://scenes/UI/button_sheen.gd")
 
 @onready var _settings: Node = get_node("/root/SettingsManager")
 
@@ -14,6 +15,22 @@ func _ready() -> void:
 	_configure_background()
 	_apply_background()
 	_settings.background_style_changed.connect(_on_background_style_changed)
+	_apply_button_sheen()
+
+
+func _apply_button_sheen() -> void:
+	var buttons: Array[Button] = [
+		$StartButton,
+		$SettingsButton,
+		$ScriptureButton,
+		$LoreButton,
+		$AboutButton,
+		$CharacterRow/CardYuri/VBox/ButtonYuri,
+		$CharacterRow/CardRaph/VBox/ButtonRaph,
+		$CharacterRow/CardGabe/VBox/ButtonGabe,
+		$CharacterRow/CardMike/VBox/ButtonMike,
+	]
+	ButtonSheen.apply_to_buttons(buttons)
 
 
 func _configure_background() -> void:
@@ -40,6 +57,14 @@ func _on_settings_button_pressed() -> void:
 
 func _on_scripture_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/UI/scripture.tscn")
+
+
+func _on_lore_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/UI/lore.tscn")
+
+
+func _on_about_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/UI/about.tscn")
 
 
 func _on_button_mike_pressed() -> void:

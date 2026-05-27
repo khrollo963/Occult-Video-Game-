@@ -247,6 +247,33 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Scripture"
 
+[node name="LoreButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -168.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = 68.0
+grow_horizontal = 0
+text = "Lore"
+
+[node name="AboutButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -168.0
+offset_top = -68.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Dev Team"
+
 [connection signal="pressed" from="CharacterRow/CardYuri/VBox/ButtonYuri" to="." method="_on_button_yuri_pressed"]
 [connection signal="pressed" from="CharacterRow/CardRaph/VBox/ButtonRaph" to="." method="_on_button_raph_pressed"]
 [connection signal="pressed" from="CharacterRow/CardGabe/VBox/ButtonGabe" to="." method="_on_button_gabe_pressed"]
@@ -254,3 +281,5 @@ text = "Scripture"
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="ScriptureButton" to="." method="_on_scripture_button_pressed"]
+[connection signal="pressed" from="LoreButton" to="." method="_on_lore_button_pressed"]
+[connection signal="pressed" from="AboutButton" to="." method="_on_about_button_pressed"]
