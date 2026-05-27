@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://bbww7h04jw1o3"]
 
 [ext_resource type="Script" uid="uid://luj2txv4j0oj" path="res://scenes/levels/Gabriel/gabe_game.gd" id="1_bwyxd"]
-[ext_resource type="Script" uid="uid://bc4p0sybmyi4a" path="res://scenes/levels/Gabriel/label.gd" id="2_2w3d0"]
-[ext_resource type="Script" uid="uid://bcowj5vo6cwnd" path="res://scenes/levels/Gabriel/back_to_menu.gd" id="2_d828r"]
 [ext_resource type="Texture2D" uid="uid://5ol6064xhxqp" path="res://assets/characters/Gabe Eagle.png" id="2_pi2rh"]
 [ext_resource type="Script" uid="uid://gc4dbmd1t714" path="res://scenes/levels/Gabriel/gabe.gd" id="2_pn752"]
 [ext_resource type="Script" uid="uid://b1jgi1e30jukh" path="res://scenes/levels/Gabriel/spawner.gd" id="4_qmd12"]
@@ -139,14 +137,8 @@ offset_right = 1247.0
 offset_bottom = 788.0
 color = Color(0, 0.023529412, 0.9098039, 1)
 
-[node name="Label" type="Label" parent="." unique_id=1763983180]
-offset_left = 24.0
-offset_top = 386.0
-offset_right = 1224.0
-offset_bottom = 474.0
-theme_override_font_sizes/font_size = 64
-text = "Gabe's Obstacle Course: Coming Soon. "
-script = ExtResource("2_2w3d0")
+[node name="BackgroundArtHook" type="Node2D" parent="." unique_id=900010001]
+metadata/art_path = "res://assets/backgrounds/gabriel/"
 
 [node name="Back to Menu" type="Button" parent="." unique_id=1527256303]
 offset_left = 75.0
@@ -155,7 +147,6 @@ offset_right = 506.0
 offset_bottom = 229.0
 theme_override_font_sizes/font_size = 64
 text = "Back to Menu"
-script = ExtResource("2_d828r")
 
 [node name="Gabe" type="CharacterBody2D" parent="." unique_id=1246424368]
 position = Vector2(150, 33)

@@ -1,41 +1,52 @@
 extends Control
 
-func start_random_game():
-	var games = [
-		"res://scenes/levels/michael/mike_game.tscn",
-		"res://scenes/levels/gabriel/gabe_game.tscn",
-		"res://scenes/levels/uriel/yuri_game.tscn",
-		"res://scenes/levels/raphael/raph_game.tscn"
-	]
-	var random_game = games[randi() % games.size()]
-	get_tree().change_scene_to_file(random_game)
+const GAME_SCENES := [
+	"res://scenes/levels/Michael/mike_game.tscn",
+	"res://scenes/levels/Gabriel/gabe_game.tscn",
+	"res://scenes/levels/Uriel/yuri_game.tscn",
+	"res://scenes/levels/Raphael/raph_game.tscn",
+]
 
-func _on_start_game_pressed():
+
+func start_random_game() -> void:
+	get_tree().change_scene_to_file(GAME_SCENES.pick_random())
+
+
+func _on_start_game_pressed() -> void:
 	start_random_game()
 
-func _on_start_button_pressed():
+
+func _on_start_button_pressed() -> void:
 	start_random_game()
 
-func _on_play_mike_pressed():
-	get_tree().change_scene_to_file("res://scenes/levels/michael/mike_game.tscn")
 
-func _on_button_mike_pressed():
-	get_tree().change_scene_to_file("res://scenes/levels/michael/mike_game.tscn")
+func _on_play_mike_pressed() -> void:
+	get_tree().change_scene_to_file(GAME_SCENES[0])
 
-func _on_play_gabe_pressed():
-	get_tree().change_scene_to_file("res://scenes/levels/gabriel/gabe_game.tscn")
 
-func _on_button_gabe_pressed():
-	get_tree().change_scene_to_file("res://scenes/levels/gabriel/gabe_game.tscn")
+func _on_button_mike_pressed() -> void:
+	get_tree().change_scene_to_file(GAME_SCENES[0])
 
-func _on_play_yuri_pressed():
-	get_tree().change_scene_to_file("res://scenes/levels/uriel/yuri_game.tscn")
-func _on_button_yuri_pressed():
-	print("Yuri button pressed!")
-	get_tree().change_scene_to_file("res://scenes/levels/uriel/yuri_game.tscn")
 
-func _on_play_raph_pressed():
-	get_tree().change_scene_to_file("res://scenes/levels/raphael/raph_game.tscn")
+func _on_play_gabe_pressed() -> void:
+	get_tree().change_scene_to_file(GAME_SCENES[1])
 
-func _on_button_raph_pressed():
-	get_tree().change_scene_to_file("res://scenes/levels/raphael/raph_game.tscn")
+
+func _on_button_gabe_pressed() -> void:
+	get_tree().change_scene_to_file(GAME_SCENES[1])
+
+
+func _on_play_yuri_pressed() -> void:
+	get_tree().change_scene_to_file(GAME_SCENES[2])
+
+
+func _on_button_yuri_pressed() -> void:
+	get_tree().change_scene_to_file(GAME_SCENES[2])
+
+
+func _on_play_raph_pressed() -> void:
+	get_tree().change_scene_to_file(GAME_SCENES[3])
+
+
+func _on_button_raph_pressed() -> void:
+	get_tree().change_scene_to_file(GAME_SCENES[3])

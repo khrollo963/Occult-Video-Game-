@@ -1,7 +1,11 @@
 extends Node2D
 
-# This scene root should NOT handle player logic.
-# Only use this for global setup if needed.
+const HUD_SCENE := preload("res://scenes/UI/hud.tscn")
 
-func _ready():
-	print("Level loaded successfully")
+
+func _ready() -> void:
+	add_child(HUD_SCENE.instantiate())
+
+
+func _on_back_to_menu_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/UI/main_menu.tscn")

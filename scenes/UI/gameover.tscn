@@ -1,35 +1,45 @@
-[gd_scene format=3 uid="uid://dsxh7rt2ntv8t"]
+[gd_scene load_steps=2 format=3 uid="uid://dsxh7rt2ntv8t"]
 
-[ext_resource type="Script" uid="uid://dpdedn0uwvwhm" path="res://scenes/UI/gameover.gd" id="1_wjqpn"]
-[ext_resource type="Script" uid="uid://y3i2nvn3m1l" path="res://scenes/UI/label.gd" id="2_bfgj2"]
-[ext_resource type="Script" uid="uid://cwb0v1hqypccb" path="res://scenes/UI/back_button.gd" id="3_bfgj2"]
+[ext_resource type="Script" path="res://scenes/UI/gameover.gd" id="1_wjqpn"]
 
-[node name="Gameover" type="CanvasLayer" unique_id=1664239996]
+[node name="Gameover" type="CanvasLayer"]
+layer = 10
 script = ExtResource("1_wjqpn")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=622374622]
-offset_right = 1987.0
-offset_bottom = 935.0
-color = Color(0, 0, 0, 1)
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.75)
 
-[node name="Label" type="Label" parent="." unique_id=1139642186]
-offset_left = 788.0
-offset_top = 375.0
-offset_right = 1166.0
-offset_bottom = 466.0
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 66
 text = "GAME OVER"
-script = ExtResource("2_bfgj2")
+horizontal_alignment = 1
 
-[node name="Back button" type="Button" parent="." unique_id=984255621]
-offset_left = 906.0
-offset_top = 213.0
-offset_right = 1049.0
-offset_bottom = 263.0
-theme_override_font_sizes/font_size = 30
-text = "Main Menu
+[node name="RetryButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Retry"
 
-"
-script = ExtResource("3_bfgj2")
+[node name="MenuButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Main Menu"
 
-[connection signal="pressed" from="Back button" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/RetryButton" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/MenuButton" to="." method="_on_menu_pressed"]

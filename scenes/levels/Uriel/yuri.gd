@@ -1,78 +1,78 @@
 extends CharacterBody2D
 
-const GRAVITY := 800.0
-const JUMP_FORCE := -500.0
-const FLOOR_Y := 570.0
+const GRAVITY := 1200.0
+const JUMP_FORCE := -550.0
 
-var health := 3
+@export var max_health := 3
+
+@onready var _game_manager: Node = get_node("/root/GameManager")
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+
+var health := max_health
 var invincible := false
 var invincible_timer := 0.0
+var is_dead := false
 
-func _ready():
-	await get_tree().physics_frame
+var gameover_scene := preload("res://scenes/UI/gameover.tscn")
+var gameover_instance: CanvasLayer = null
 
-func _physics_process(delta):
-	handle_input()
-	handle_gravity(delta)
-	handle_damage()
-	handle_invincibility(delta)
-	move_and_slide()
-	update_animation()
 
-func handle_input():
-	if Input.is_key_pressed(KEY_SPACE):
-		if position.y >= FLOOR_Y - 5:
-			velocity.y = JUMP_FORCE
+func _ready() -> void:
+	health = max_health
+	_game_manager.set_health(health, max_health)
 
-func handle_gravity(delta):
-	velocity.y += GRAVITY * delta
 
-	if position.y > FLOOR_Y:
-		position.y = FLOOR_Y
-		velocity.y = 0
-
-func handle_damage():
-	if invincible:
+func _physics_process(delta: float) -> void:
+	if is_dead:
 		return
 
-	for area in $Hitbox.get_overlapping_areas():
-		apply_damage(1)
-		break
+	velocity.y += GRAVITY * delta
 
-func apply_damage(amount := 1):
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = JUMP_FORCE
+
+	move_and_slide()
+	update_animation()
+	handle_invincibility(delta)
+
+
+func take_damage(amount := 1) -> void:
+	if is_dead or invincible:
+		return
+
 	health -= amount
-	print("HIT! Health:", health)
-
+	_game_manager.set_health(health, max_health)
 	invincible = true
 	invincible_timer = 1.0
-
-	if has_node("AnimatedSprite2D"):
-		$AnimatedSprite2D.modulate = Color(1, 0, 0)
+	anim.modulate = Color(1.0, 0.3, 0.3)
 
 	if health <= 0:
 		die()
 
-func handle_invincibility(delta):
+
+func handle_invincibility(delta: float) -> void:
 	if not invincible:
 		return
 
 	invincible_timer -= delta
-
-	if invincible_timer <= 0:
+	if invincible_timer <= 0.0:
 		invincible = false
+		anim.modulate = Color.WHITE
 
-		if has_node("AnimatedSprite2D"):
-			$AnimatedSprite2D.modulate = Color(1, 1, 1)
 
-func update_animation():
-	if not has_node("AnimatedSprite2D"):
+func update_animation() -> void:
+	if not is_on_floor():
+		anim.play("jump")
+	else:
+		anim.play("walk")
+
+
+func die() -> void:
+	if is_dead:
 		return
 
-	if position.y >= FLOOR_Y - 5:
-		$AnimatedSprite2D.play("idle")
-	else:
-		$AnimatedSprite2D.play("jump")
-
-func die():
-	print("YURI DEAD")
-	get_tree().change_scene_to_file("res://scenes/UI/gameover.tscn")
+	is_dead = true
+	velocity = Vector2.ZERO
+	_game_manager.show_game_over()
+	gameover_instance = gameover_scene.instantiate()
+	get_tree().current_scene.add_child(gameover_instance)
