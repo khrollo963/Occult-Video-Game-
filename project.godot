@@ -19,6 +19,12 @@ config/icon="res://icon.svg"
 
 GameManager="*res://scripts/game_manager.gd"
 SettingsManager="*res://scripts/settings_manager.gd"
+EventBus="*res://scripts/event_bus.gd"
+ScoreManager="*res://scripts/score_manager.gd"
+TransitionManager="*res://scripts/transition_manager.gd"
+AudioManager="*res://scripts/audio_manager.gd"
+LeaderboardService="*res://scripts/leaderboard_service.gd"
+VfxManager="*res://scripts/vfx_manager.gd"
 
 [display]
 
@@ -69,7 +75,7 @@ duck={
 
 [gui]
 
-theme/custom="uid://arcade_theme001"
+theme/custom="res://assets/ui/arcade_theme.tres"
 
 [physics]
 

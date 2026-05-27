@@ -1,180 +1,152 @@
-# ⚔️ GLORY QUEST ARCADE
+# Glory Quest Arcade
 
 > *The Kerubic Signs descend into Samsara — four legendary beings, four unique battles, one sacred mission.*
 
-A collection of 4 unique arcade mini-games, each built around one of the four Holy Living Creatures (Tetramorph) from Ezekiel's vision and Revelation 4:7. Drawing from **Hermetic**, **Thelemic**, and **Gnostic** mystical traditions.
+A browser-playable Godot 4.6 arcade collection built around the four Holy Living Creatures (Tetramorph) from Ezekiel 1:10 and Revelation 4:7. Drawing from **Hermetic**, **Thelemic**, and **Gnostic** mystical traditions.
+
+**Play:** [https://khrollo963.github.io/Occult-Video-Game-/](https://khrollo963.github.io/Occult-Video-Game-/)
 
 ---
 
-## 🎮 The Four Games
+## The Four Games (Current Build)
 
-### 🦁 MIKE — The Lion | Endless Platformer
-*"As Above, So Below"*
+| Character | Game | Genre | Score |
+|-----------|------|-------|-------|
+| **Mike** (Lion) | Mike's Daunting Quest | Side-scrolling platformer + melee | Reach the goal; defeat enemies |
+| **Gabe** (Eagle) | Gabe's Spectacular Collector | Flying collector / hazard dodge | Collect apples; survive hazards |
+| **Yuri** (Bull) | Yuri's Crazy Endless Runner | Endless runner (jump + duck) | Distance traveled |
+| **Raph** (Angel) | Raph's Funny Flight | Vertical platformer | Height climbed |
 
-**Style:** Doodle Jump
-- Michael the Lion leaps endlessly upward across floating platforms
-- Platforms ascend through the spiritual planes — from Malkuth to Kether
-- Enemies appear on platforms trying to knock him down
-- The higher you climb, the faster and more chaotic it gets
-- **Score:** How high can Michael ascend?
+### Controls
 
-**Sprite:** Lion (B.Rap Boys Arcade)
+See **Settings → How to Play** in-game for the full control reference.
 
----
-
-### 🦅 GABE — The Eagle | Obstacle Course
-*"The Word Must Pass Through Chaos"*
-
-**Style:** Flappy Bird meets Geometry Dash
-- Gabriel the Eagle flies through 9 unique obstacle courses
-- Each course represents a corrupted plane of existence
-- Obstacles inspired by Goetic sigils, Qliphothic architecture, and Thelemic symbolism
-- 9 levels of increasing difficulty and visual complexity
-- **Score:** Complete all 9 courses
-
-**Sprite:** Eagle (Planet Centauri)
+| Action | Keys |
+|--------|------|
+| Move | `A` / `D` or Arrow keys |
+| Jump | `Space` |
+| Attack | `Enter` |
+| Duck | `S` or Down arrow (Yuri) |
+| Pause | `Escape` |
 
 ---
 
-### 🐂 YURI — The Bull | Endless Runner
-*"The Earth Must Be Reclaimed"*
+## What's Done
 
-**Style:** Jetpack Joyride meets Circus Charlie
-- Uriel the Bull charges endlessly through a corrupted earthly realm
-- Circus Charlie inspired backdrop — vibrant, chaotic, beautiful
-- Dodge and maneuver through waves of demonic obstacles
-- Power-ups tied to Hermetic Earth principles
-- **Score:** How far can Uriel run?
-
-**Sprite:** Bull (B.Rap Boys Arcade)
-
----
-
-### 👼 RAPH — The Bearer | Hack & Slash Side Scroller
-*"The Healer Becomes The Warrior"*
-
-**Style:** Original Mario meets Zelda mechanics
-- Raphael the Angel fights through 4 unique side-scrolling levels
-- Each level ends with a unique boss battle
-- Zelda-inspired combat — sword attacks, dodging, item use
-- Classic Mario-style level progression and platforming
-- **Score:** Defeat all 4 bosses and liberate Samsara
-
-**Sprite:** Angel (Heroes of Might and Magic 3)
-
-#### Raph's 4 Boss Battles:
-| Battle | Boss | Domain |
-|--------|------|--------|
-| 1 | **Satan** | Wrath |
-| 2 | **Asmodeus** | Lust |
-| 3 | **Choronzon** | Chaos/The Abyss |
-| 4 | **Babalon & Therion** | The Final Corruption |
+- [x] Godot 4.6 project with four playable prototypes
+- [x] Main menu (character select, random start, Lore, Dev Team, Scripture, Settings, Leaderboard)
+- [x] Settings with per-game tuning sliders + background style toggle
+- [x] How to Play + Controls in Settings
+- [x] Shared HUD, game over flow, scene transitions
+- [x] Local high scores + medals; global Supabase leaderboard
+- [x] AudioManager, EventBus, VFX particles, parallax backgrounds
+- [x] Character sprite pipeline (`tools/slice_sprites.py`)
+- [x] GitHub Pages Web export CI
+- [x] Button sheen shader on menu buttons
+- [x] Yuri duck mechanic for overhead obstacles
 
 ---
 
-## 🗺️ Main Menu
+## What's Left (Stretch)
 
-- **Glory Quest Arcade** title screen
-- Select one of 4 characters to play their unique game
-- Each character portrait displayed with their element and symbol
-- Occult aesthetic — deep purple, gold, sacred geometry
-
----
-
-## 🔮 Occult Themes
-
-Each mini-game is layered with symbolism from three traditions:
-
-**Hermetic:** The four elements (Fire/Air/Earth/Water) map to each character
-**Thelemic:** The Qliphothic forces serve as enemies and obstacles  
-**Gnostic:** The goal is liberation — ascending, breaking through, running free, healing
-
-| Character | Element | Hermetic Principle | Thelemic Layer |
-|-----------|---------|-------------------|----------------|
-| **Mike (Lion)** | Fire | Sulfur — Spirit ascending | Climbing the Tree of Life |
-| **Gabe (Eagle)** | Air/Water | Mercury — The Word in motion | Crossing the Abyss |
-| **Yuri (Bull)** | Earth | Salt — Matter reclaimed | Running from the Qliphoth |
-| **Raph (Angel)** | Quintessence | The Great Work completed | Defeating the Archdemons |
+- [ ] Full boss battles for Raph (original README vision)
+- [ ] Dedicated occult art pass (replace placeholder sprites)
+- [ ] Mobile touch controls
+- [ ] Localization
 
 ---
 
-## 🎨 Sprites & Assets
+## Occult Themes
 
-| Character | Sprite Source | Animations Available |
-|-----------|--------------|---------------------|
-| Mike | B.Rap Boys (Arcade) | Idle, Walk, Attack, Pounce, Knockdown |
-| Gabe | Planet Centauri (PC) | Idle, Fly, Dive, Flap |
-| Yuri | B.Rap Boys (Arcade) | Walk, Charge, Ram, Turn |
-| Raph | Heroes of Might & Magic 3 | Walk, Attack, Fly, Death, Special |
+| Character | Element | Zodiac | Hermetic Principle |
+|-----------|---------|--------|-------------------|
+| **Mike** | Fire | Leo | Sulfur — Spirit ascending |
+| **Gabe** | Air/Water | Scorpio | Mercury — The Word in motion |
+| **Yuri** | Earth | Taurus | Salt — Matter reclaimed |
+| **Raph** | Quintessence | Aquarius | The Great Work completed |
 
 ---
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
-Glory-Quest/
+Occult-Video-Game-/
 ├── assets/
-│   ├── characters/     ← Mike, Gabe, Yuri, Raph sprites
-│   ├── enemies/        ← Goetic & Qliphothic obstacle sprites
-│   ├── backgrounds/    ← Level backgrounds per game
-│   ├── audio/          ← Music & SFX
-│   └── ui/             ← Menus, HUD elements
+│   ├── characters/       # Source PNGs + frames/*.tres
+│   ├── enemies/          # Enemy placeholder sprites
+│   ├── obstacles/        # Hazard / platform sprites
+│   ├── audio/            # Music & SFX
+│   ├── fonts/
+│   └── ui/               # Theme, shaders
+├── config/
+│   └── leaderboard.cfg.example
+├── docs/
+│   └── leaderboard-setup.md
 ├── scenes/
-│   ├── characters/     ← Character scenes
 │   ├── levels/
-│   │   ├── michael/    ← Endless platformer levels
-│   │   ├── gabriel/    ← 9 obstacle courses
-│   │   ├── uriel/      ← Endless runner levels
-│   │   ├── raphael/    ← 4 hack & slash levels
-│   │   └── shared/     ← Main menu, shared assets
-│   ├── bosses/         ← Raph's 4 boss scenes
-│   └── ui/             ← Menu scenes
-├── scripts/            ← GDScript logic
-└── project.godot       ← Godot 4 project file
+│   │   ├── Michael/      # Mike platformer
+│   │   ├── Gabriel/      # Gabe collector
+│   │   ├── Uriel/        # Yuri runner
+│   │   └── Raphael/      # Raph vertical jumper
+│   ├── UI/               # Menu, settings, leaderboard, HUD
+│   └── vfx/              # Shared particle effects
+├── scripts/              # Autoloads
+├── supabase/migrations/  # Leaderboard schema
+├── tests/                # GUT smoke tests
+├── tools/
+│   └── slice_sprites.py
+└── project.godot
 ```
 
 ---
 
-## 🚀 Development Roadmap
+## Local Development
+
+1. Open the project in **Godot 4.6+** (or run `godot4.exe` from project root if present).
+2. Regenerate character frames: `.venv\Scripts\python.exe tools\slice_sprites.py`
+3. Generate placeholder art: `python tools/generate_placeholders.py`
+4. Player settings persist to `user://settings.cfg`; scores to `user://arcade_save.cfg`.
+5. Copy `config/leaderboard.cfg.example` → `config/leaderboard.cfg` and fill Supabase URL + anon key (see [docs/leaderboard-setup.md](docs/leaderboard-setup.md)).
+
+---
+
+## Development Roadmap
 
 ### Phase 1 — Foundation ✅
-- [x] GitHub repo set up
-- [x] Godot 4 project created
-- [x] Main menu scene with all 4 character portraits
-- [x] Folder structure established
+- [x] Repo, Godot project, main menu, four prototypes, Web CI
 
-### Phase 2 — Raph's Hack & Slash (In Progress)
-- [ ] Basic side-scrolling movement
-- [ ] Sword attack mechanics
-- [ ] Level 1 design
-- [ ] Boss 1: Satan
+### Phase 2 — Arcade Polish ✅
+- [x] AudioManager, transitions, local scores, EventBus, VFX, How to Play
 
-### Phase 3 — Yuri's Endless Runner
-- [ ] Endless runner engine
-- [ ] Obstacle spawning system
-- [ ] Circus Charlie backdrop
-- [ ] Score system
+### Phase 3 — Visual Identity ✅
+- [x] Parallax backgrounds, placeholder sprites, hit/glow shaders
 
-### Phase 4 — Gabe's Obstacle Course
-- [ ] Flappy Bird/Geometry Dash engine
-- [ ] 9 unique course designs
-- [ ] Qliphothic obstacle art
+### Phase 4 — Game Depth ✅
+- [x] Mike level variety, Gabe 9 waves, Yuri power-ups, Raph hazards + HP
 
-### Phase 5 — Mike's Endless Platformer
-- [ ] Doodle Jump style engine
-- [ ] Platform generation system
-- [ ] Enemy placement system
+### Phase 5 — Global Leaderboard ✅
+- [x] OccultVideoGame Supabase project, 3-char initials, public leaderboard UI
 
-### Phase 6 — Polish & Release
-- [ ] HTML5 export
-- [ ] GitHub Pages deployment
-- [ ] Free to play in browser
+### Phase 6 — Meta & Release ✅
+- [x] Menu high scores, medals, random-start splash, Leaderboard button
+
+### Phase 7 — Production ✅
+- [x] UID fixes, GUT tests, visual quality preset, leaderboard docs
 
 ---
 
-## 🌐 Play The Game
+## Known Issues
 
-*Coming soon at:* `https://khrollo963.github.io/Occult-Video-Game-/`
+- On a fresh clone, delete `.godot/` and reimport if you see invalid UID warnings.
+- Theme is referenced via `res://assets/ui/arcade_theme.tres` in `project.godot` (not hand-written UIDs).
+
+---
+
+## Leaderboard
+
+Global scores are stored in Supabase project **OccultVideoGame**. Setup instructions: [docs/leaderboard-setup.md](docs/leaderboard-setup.md).
+
+For local dev, copy `config/leaderboard.cfg.example` to `config/leaderboard.cfg` and add your anon key. For GitHub Pages, set the `SUPABASE_URL` and `SUPABASE_ANON_KEY` repository secrets so CI injects config at export time.
 
 ---
 

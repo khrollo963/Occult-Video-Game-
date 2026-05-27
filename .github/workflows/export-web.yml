@@ -20,6 +20,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Write leaderboard config for Web export
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          mkdir -p config
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_ANON_KEY" ]; then
+            echo "Supabase secrets not set — copying example config (leaderboard disabled in build)"
+            cp config/leaderboard.cfg.example config/leaderboard.cfg
+          else
+            printf '%s\n' '[supabase]' "url=\"$SUPABASE_URL\"" "anon_key=\"$SUPABASE_ANON_KEY\"" > config/leaderboard.cfg
+          fi
+
+      - name: Run smoke tests
+        run: |
+          curl -L -o godot.zip "https://github.com/godotengine/godot/releases/download/4.6.3-stable/Godot_v4.6.3-stable_linux.x86_64.zip"
+          unzip -q godot.zip
+          GODOT=$(find . -maxdepth 1 -name 'Godot_v4.6.3-stable_linux.x86_64' -type f | head -1)
+          chmod +x "$GODOT"
+          "$GODOT" --headless --path . --import --quit
+          "$GODOT" --headless --script tests/run_smoke.gd
+
       - name: Export Godot project to Web
         id: export
         uses: firebelley/godot-export@v7.0.0

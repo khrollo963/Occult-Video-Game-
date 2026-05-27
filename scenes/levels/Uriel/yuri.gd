@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+const HitFlashHelper := preload("res://scripts/hit_flash.gd")
+
 const GRAVITY := 1200.0
 const JUMP_FORCE := -550.0
 const STAND_SIZE := Vector2(70, 50)
@@ -57,6 +59,9 @@ func take_damage(amount := 1) -> void:
 
 	health -= amount
 	_game_manager.set_health(health, max_health)
+	get_node("/root/EventBus").player_damaged.emit(amount)
+	get_node("/root/VfxManager").spawn("hit_spark", global_position)
+	HitFlashHelper.flash(anim)
 	invincible = true
 	invincible_timer = 1.0
 	anim.modulate = Color(1.0, 0.3, 0.3)
@@ -102,6 +107,8 @@ func die() -> void:
 
 	is_dead = true
 	velocity = Vector2.ZERO
+	get_node("/root/AudioManager").play_sfx("death")
+	_game_manager.end_run("yuri", _game_manager.get_score())
 	_game_manager.show_game_over()
 	gameover_instance = gameover_scene.instantiate()
 	get_tree().current_scene.add_child(gameover_instance)

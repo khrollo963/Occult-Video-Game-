@@ -1,7 +1,34 @@
 extends Control
 
-@onready var _settings: Node = get_node("/root/SettingsManager")
+const SceneNav := preload("res://scripts/scene_nav.gd")
 
+const HOW_TO_PLAY_TEXT := """[font_size=22][b]How to Play[/b][/font_size]
+
+[b]Global Controls[/b]
+• Move: A / D or Left / Right arrows
+• Jump: Space
+• Attack: Enter
+• Duck: S or Down arrow (Yuri overhead obstacles)
+• Pause: Escape
+• Confirm: Enter / Space
+
+[b]Mike — Daunting Quest[/b]
+Side-scrolling platformer. Reach the goal flag, attack enemies with Enter, and avoid contact damage.
+
+[b]Gabe — Spectacular Collector[/b]
+Fly with Space, move horizontally, collect green apples, and dodge red hazards. Survive 9 waves of increasing chaos.
+
+[b]Yuri — Crazy Endless Runner[/b]
+Auto-run forward. Jump over ground obstacles and duck under overhead beams. Grab power-ups when they appear.
+
+[b]Raph — Funny Flight[/b]
+Bounce upward on platforms. Move left and right. Avoid spikes and crumbling platforms — do not fall below the camera.
+
+[b]Leaderboard[/b]
+Set your 3-character arcade initials below. Scores submit automatically when a run ends."""
+
+@onready var _settings: Node = get_node("/root/SettingsManager")
+@onready var _score_mgr: Node = get_node("/root/ScoreManager")
 @onready var background_option: OptionButton = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/BackgroundRow/BackgroundOption
 @onready var mike_slider: HSlider = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/MikeRow/MikeSlider
 @onready var mike_value: Label = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/MikeRow/MikeValue
@@ -13,6 +40,12 @@ extends Control
 @onready var yuri_obstacle_value: Label = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/YuriObstacleRow/YuriObstacleValue
 @onready var raph_slider: HSlider = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/RaphRow/RaphSlider
 @onready var raph_value: Label = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/RaphRow/RaphValue
+@onready var initials_edit: LineEdit = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/InitialsRow/InitialsEdit
+@onready var initials_status: Label = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/InitialsRow/InitialsStatus
+@onready var vfx_check: CheckBox = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/VisualRow/VfxCheck
+@onready var parallax_check: CheckBox = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/VisualRow/ParallaxCheck
+@onready var how_to_play_label: RichTextLabel = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/HowToPlayLabel
+@onready var medals_label: RichTextLabel = $MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/MedalsLabel
 
 
 func _ready() -> void:
@@ -30,7 +63,13 @@ func _ready() -> void:
 	yuri_speed_slider.value = _settings.yuri_scroll_speed
 	yuri_obstacle_slider.value = _settings.yuri_obstacle_rate
 	raph_slider.value = _settings.raph_platform_gap
+	initials_edit.text = _settings.get_initials()
+	vfx_check.button_pressed = _settings.visual_effects_enabled
+	parallax_check.button_pressed = _settings.parallax_enabled
+	how_to_play_label.text = HOW_TO_PLAY_TEXT
+	_refresh_medals()
 	_refresh_labels()
+	get_node("/root/EventBus").medal_unlocked.connect(func(_id): _refresh_medals())
 
 
 func _configure_background() -> void:
@@ -45,6 +84,11 @@ func _refresh_labels() -> void:
 	yuri_speed_value.text = "%.1fx" % yuri_speed_slider.value
 	yuri_obstacle_value.text = "%.1fx" % yuri_obstacle_slider.value
 	raph_value.text = "%.1fx" % raph_slider.value
+
+
+func _refresh_medals() -> void:
+	var lines: PackedStringArray = _score_mgr.get_medal_lines()
+	medals_label.text = "[font_size=22][b]Medals[/b][/font_size]\n" + "\n".join(lines)
 
 
 func _on_background_option_item_selected(index: int) -> void:
@@ -76,12 +120,38 @@ func _on_raph_slider_value_changed(value: float) -> void:
 	_refresh_labels()
 
 
+func _on_initials_edit_text_submitted(new_text: String) -> void:
+	_save_initials(new_text)
+
+
+func _on_initials_edit_focus_exited() -> void:
+	_save_initials(initials_edit.text)
+
+
+func _save_initials(text: String) -> void:
+	if _settings.set_initials(text):
+		initials_status.text = "Saved: %s" % _settings.get_initials()
+		initials_status.modulate = Color(0.6, 1.0, 0.6)
+	else:
+		initials_status.text = "Use exactly 3 letters or numbers"
+		initials_status.modulate = Color(1.0, 0.5, 0.5)
+
+
+func _on_vfx_check_toggled(pressed: bool) -> void:
+	_settings.set_visual_effects_enabled(pressed)
+
+
+func _on_parallax_check_toggled(pressed: bool) -> void:
+	_settings.set_parallax_enabled(pressed)
+
+
 func _on_background_style_changed(_style: String) -> void:
 	_settings.apply_background(self, _settings.LEGACY_MENU)
 
 
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/UI/main_menu.tscn")
+	get_node("/root/AudioManager").play_ui_click()
+	SceneNav.go("res://scenes/UI/main_menu.tscn")
 
 
 func _on_exit_pressed() -> void:

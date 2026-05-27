@@ -1,5 +1,7 @@
 extends Control
 
+const SceneNav := preload("res://scripts/scene_nav.gd")
+
 const ABOUT_TEXT := """[font_size=24][b]About[/b][/font_size]
 
 [b]Uthman (KenThreeTimes) Ken[/b]
@@ -37,4 +39,4 @@ func _on_background_style_changed(_style: String) -> void:
 
 
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/UI/main_menu.tscn")
+	SceneNav.go("res://scenes/UI/main_menu.tscn")

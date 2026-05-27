@@ -1,5 +1,7 @@
 extends Control
 
+const SceneNav := preload("res://scripts/scene_nav.gd")
+
 const LORE_TEXT := """[font_size=24][b]Glory Quest Arcade[/b][/font_size]
 
 Enter the Retroactive world of Glory Quest Arcade — an interactive enigma!
@@ -53,4 +55,4 @@ func _on_background_style_changed(_style: String) -> void:
 
 
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/UI/main_menu.tscn")
+	SceneNav.go("res://scenes/UI/main_menu.tscn")

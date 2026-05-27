@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/vfx/vfx_burst.gd" id="1"]
+
+[node name="LandingDust" type="Node2D"]
+script = ExtResource("1")
+color = Color(0.75, 0.65, 0.45, 1)
+amount = 8
+spread = 60.0
+initial_velocity = 40.0

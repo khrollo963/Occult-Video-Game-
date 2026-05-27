@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+const HitFlashHelper := preload("res://scripts/hit_flash.gd")
+
 @export var move_speed := 180.0
 @export var gravity := 900.0
 @export var flap_force := 350.0
@@ -29,6 +31,7 @@ var gameover_instance: CanvasLayer = null
 func _ready() -> void:
 	health = max_health
 	_emit_hud()
+	_game_manager.current_game_id = "gabe"
 
 
 func _physics_process(delta: float) -> void:
@@ -52,6 +55,7 @@ func handle_input(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and flap_timer <= 0.0:
 		velocity.y = -flap_force
 		flap_timer = flap_cooldown
+		get_node("/root/AudioManager").play_sfx("jump")
 
 	if Input.is_action_just_pressed("attack"):
 		start_lunge()
@@ -83,6 +87,9 @@ func handle_gravity(delta: float) -> void:
 func eat_apple() -> void:
 	collectibles += 1
 	score += 10
+	get_node("/root/EventBus").collectible_picked.emit(10)
+	get_node("/root/VfxManager").spawn("pickup_burst", global_position)
+	get_node("/root/AudioManager").play_sfx("pickup")
 	_emit_hud()
 
 
@@ -92,6 +99,11 @@ func take_damage(amount := 1) -> void:
 
 	health -= amount
 	_emit_hud()
+	get_node("/root/EventBus").player_damaged.emit(amount)
+	get_node("/root/VfxManager").spawn("hit_spark", global_position)
+	get_node("/root/EventBus").camera_shake_requested.emit(4.0, 0.18)
+	get_node("/root/AudioManager").play_sfx("hit")
+	HitFlashHelper.flash(anim)
 	flash_red()
 
 	if health <= 0:
@@ -113,6 +125,8 @@ func die() -> void:
 	is_dead = true
 	velocity = Vector2.ZERO
 	anim.play("idle")
+	get_node("/root/AudioManager").play_sfx("death")
+	_game_manager.end_run("gabe", score)
 	show_game_over()
 
 

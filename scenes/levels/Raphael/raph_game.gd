@@ -2,6 +2,14 @@ extends Node2D
 
 const HUD_SCENE := preload("res://scenes/UI/hud.tscn")
 const PLATFORM_SCENE := preload("res://scenes/levels/Raphael/raph_platform.tscn")
+const SceneNav := preload("res://scripts/scene_nav.gd")
+
+const HEIGHT_MILESTONES := {
+	500: "Yesod",
+	1500: "Hod",
+	3000: "Netzach",
+	5000: "Tiphereth",
+}
 
 @export var platform_count := 18
 @export var min_platform_gap := 70.0
@@ -17,12 +25,14 @@ var highest_y := 0.0
 var spawn_cursor_y := 0.0
 var gap_multiplier := 1.0
 var rng := RandomNumberGenerator.new()
+var _milestone_shown := ""
 
 
 func _ready() -> void:
 	rng.randomize()
 	camera.make_current()
 	add_child(HUD_SCENE.instantiate())
+	_add_parallax()
 	_configure_background()
 	_apply_background()
 	_apply_game_options()
@@ -30,6 +40,7 @@ func _ready() -> void:
 	_settings.game_options_changed.connect(_on_game_options_changed)
 	_game_manager.set_score(0)
 	_game_manager.set_stat("Height", 0)
+	_game_manager.current_game_id = "raph"
 	_spawn_starting_platforms()
 
 
@@ -49,7 +60,7 @@ func _apply_game_options() -> void:
 
 func _spawn_starting_platforms() -> void:
 	spawn_cursor_y = 620.0
-	_spawn_platform(Vector2(640.0, 620.0))
+	_spawn_platform(Vector2(640.0, 620.0), "normal")
 	for i in platform_count:
 		_spawn_platform_above()
 
@@ -59,12 +70,24 @@ func _spawn_platform_above() -> void:
 	var max_gap := max_platform_gap * gap_multiplier
 	spawn_cursor_y -= rng.randf_range(min_gap, max_gap)
 	var x := rng.randf_range(120.0, 1160.0)
-	_spawn_platform(Vector2(x, spawn_cursor_y))
+	var roll := rng.randf()
+	var kind := "normal"
+	if roll > 0.94:
+		kind = "golden"
+	elif roll > 0.88:
+		kind = "crumble"
+	elif roll > 0.78:
+		kind = "spike"
+	elif roll > 0.65:
+		kind = "moving"
+	_spawn_platform(Vector2(x, spawn_cursor_y), kind)
 
 
-func _spawn_platform(pos: Vector2) -> void:
+func _spawn_platform(pos: Vector2, kind: String) -> void:
 	var platform := PLATFORM_SCENE.instantiate()
 	platform.position = pos
+	if platform.has_method("setup"):
+		platform.setup(kind)
 	platforms.add_child(platform)
 
 
@@ -82,6 +105,7 @@ func _process(_delta: float) -> void:
 	var player_height := int(maxf(0.0, 620.0 - player.global_position.y))
 	_game_manager.set_score(player_height)
 	_game_manager.set_stat("Height", player_height)
+	_check_milestone(player_height)
 
 	if player.global_position.y < highest_y:
 		highest_y = player.global_position.y
@@ -90,6 +114,17 @@ func _process(_delta: float) -> void:
 		_spawn_platform_above()
 
 	_cleanup_platforms()
+
+
+func _check_milestone(height: int) -> void:
+	for threshold in [500, 1500, 3000, 5000]:
+		if height >= threshold:
+			var plane_name: String = HEIGHT_MILESTONES[threshold]
+			if _milestone_shown != plane_name:
+				_milestone_shown = plane_name
+				_game_manager.set_stat("Plane", threshold)
+				var gradient: ColorRect = $SimpleGradientBg.get_node("Gradient")
+				gradient.top_color = Color(0.98 - threshold * 0.0001, 0.92, 0.72, 1.0)
 
 
 func _cleanup_platforms() -> void:
@@ -108,4 +143,19 @@ func _on_game_options_changed() -> void:
 
 
 func _on_back_to_menu_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/UI/main_menu.tscn")
+	SceneNav.go("res://scenes/UI/main_menu.tscn")
+
+
+func get_player_position() -> Vector2:
+	return player.global_position
+
+
+func _add_parallax() -> void:
+	var bg := ParallaxBackground.new()
+	bg.set_script(load("res://scripts/parallax_setup.gd"))
+	bg.layer_colors = [
+		Color(0.98, 0.92, 0.72, 0.45),
+		Color(0.92, 0.78, 0.55, 0.35),
+	]
+	add_child(bg)
+	move_child(bg, 1)

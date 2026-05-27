@@ -8,6 +8,8 @@ const ATTACK_DURATION := 0.25
 
 @export var max_health := 5
 
+const HitFlashHelper := preload("res://scripts/hit_flash.gd")
+
 @onready var _game_manager: Node = get_node("/root/GameManager")
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_hitbox: Area2D = $AttackHitbox
@@ -43,6 +45,8 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("jump") and is_on_floor() and not attacking:
 		velocity.y = JUMP_FORCE
+		get_node("/root/AudioManager").play_sfx("jump")
+		get_node("/root/VfxManager").spawn("landing_dust", global_position)
 
 	if Input.is_action_just_pressed("attack") and not attacking:
 		start_attack()
@@ -84,6 +88,9 @@ func take_damage(amount := 1) -> void:
 
 	health -= amount
 	_game_manager.set_health(health, max_health)
+	get_node("/root/EventBus").player_damaged.emit(amount)
+	get_node("/root/VfxManager").spawn("hit_spark", global_position)
+	HitFlashHelper.flash(anim)
 	invincible = true
 	invincible_timer = 1.0
 	anim.modulate = Color(1.0, 0.35, 0.35)
@@ -105,6 +112,9 @@ func handle_invincibility(delta: float) -> void:
 func die() -> void:
 	is_dead = true
 	velocity = Vector2.ZERO
+	get_node("/root/AudioManager").play_sfx("death")
+	get_node("/root/VfxManager").spawn("death_poof", global_position)
+	_game_manager.end_run("mike", _game_manager.get_score())
 	_game_manager.show_game_over()
 	gameover_instance = gameover_scene.instantiate()
 	get_tree().current_scene.add_child(gameover_instance)

@@ -14,6 +14,9 @@ var _has_score := false
 var _has_stat := false
 var mike_level := 1
 var mike_advance_level := false
+var current_game_id := ""
+var last_run_score := 0
+var last_run_new_best := false
 
 
 func set_health(current: int, maximum: int) -> void:
@@ -27,6 +30,10 @@ func set_score(score: int) -> void:
 	_score = score
 	_has_score = true
 	score_changed.emit(score)
+
+
+func get_score() -> int:
+	return _score
 
 
 func set_stat(label: String, value: int) -> void:
@@ -43,6 +50,16 @@ func apply_cached_hud(hud: CanvasLayer) -> void:
 		hud.set_score(_score)
 	if _has_stat and hud.has_method("set_stat"):
 		hud.set_stat(_stat_label, _stat_value)
+
+
+func end_run(game_id: String, score: int) -> void:
+	current_game_id = game_id
+	last_run_score = score
+	var score_mgr: Node = get_node("/root/ScoreManager")
+	last_run_new_best = score_mgr.record_run(game_id, score)
+	get_node("/root/EventBus").run_ended.emit(game_id, score)
+	if last_run_new_best:
+		get_node("/root/AudioManager").play_sfx("new_high_score")
 
 
 func show_game_over() -> void:

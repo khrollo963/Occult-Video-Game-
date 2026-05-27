@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+const HitFlashHelper := preload("res://scripts/hit_flash.gd")
+
 const GRAVITY := 980.0
 const MOVE_SPEED := 260.0
 const JUMP_FORCE := -520.0
@@ -31,6 +33,7 @@ func _physics_process(delta: float) -> void:
 
 	if is_on_floor() and velocity.y >= 0.0:
 		velocity.y = JUMP_FORCE
+		get_node("/root/AudioManager").play_sfx("jump")
 
 	update_animation()
 
@@ -47,12 +50,26 @@ func update_animation() -> void:
 		anim.flip_h = velocity.x < 0.0
 
 
+func take_damage(amount := 1) -> void:
+	if is_dead:
+		return
+	health -= amount
+	_game_manager.set_health(health, max_health)
+	get_node("/root/EventBus").player_damaged.emit(amount)
+	get_node("/root/VfxManager").spawn("hit_spark", global_position)
+	HitFlashHelper.flash(anim)
+	if health <= 0:
+		die()
+
+
 func die() -> void:
 	if is_dead:
 		return
-
 	is_dead = true
 	velocity = Vector2.ZERO
+	get_node("/root/AudioManager").play_sfx("death")
+	get_node("/root/VfxManager").spawn("death_poof", global_position)
+	_game_manager.end_run("raph", _game_manager.get_score())
 	_game_manager.show_game_over()
 	gameover_instance = gameover_scene.instantiate()
 	get_tree().current_scene.add_child(gameover_instance)

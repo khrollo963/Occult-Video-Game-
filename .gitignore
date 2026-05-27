@@ -5,3 +5,5 @@
 godot4.exe
 .venv/
 tools/output/
+config/leaderboard.cfg
+.cursor/

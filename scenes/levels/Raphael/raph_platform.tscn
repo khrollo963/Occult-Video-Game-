@@ -1,10 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://raphplatform01"]
+[gd_scene load_steps=4 format=3 uid="uid://raphplatform01"]
+
+[ext_resource type="Script" path="res://scenes/levels/Raphael/raph_platform.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/obstacles/platform.png" id="2_tex"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_plat"]
 size = Vector2(96, 18)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_spike"]
+size = Vector2(80, 10)
+
 [node name="RaphPlatform" type="StaticBody2D"]
-collision_layer = 1
+script = ExtResource("1_script")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_plat")
@@ -15,3 +21,17 @@ offset_top = -9.0
 offset_right = 48.0
 offset_bottom = 9.0
 color = Color(0.55, 0.35, 0.15, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_tex")
+
+[node name="SpikeArea" type="Area2D" parent="."]
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpikeArea"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_spike")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="SpikeArea" to="." method="_on_spike_body_entered"]
