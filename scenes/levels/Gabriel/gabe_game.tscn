@@ -108,118 +108,77 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_grvo7"]
-size = Vector2(242.125, 164.5)
+size = Vector2(120, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w6fme"]
 size = Vector2(212.375, 131.9375)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2w3d0"]
-size = Vector2(1467, 385.9375)
+size = Vector2(1280, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pn752"]
-size = Vector2(1478.5, 268.5)
+size = Vector2(1280, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qmd12"]
-size = Vector2(86, 899)
+size = Vector2(20, 720)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d828r"]
-size = Vector2(472.5, 1084)
+size = Vector2(20, 720)
 
 [node name="Gabe_Game" type="Node2D" unique_id=272267348]
-position = Vector2(297, 110)
 script = ExtResource("1_bwyxd")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1283572857]
-custom_minimum_size = Vector2(1280, 720)
-offset_left = -33.0
-offset_top = 68.0
-offset_right = 1247.0
-offset_bottom = 788.0
+offset_right = 1280.0
+offset_bottom = 720.0
 color = Color(0, 0.023529412, 0.9098039, 1)
 
 [node name="BackgroundArtHook" type="Node2D" parent="." unique_id=900010001]
 metadata/art_path = "res://assets/backgrounds/gabriel/"
 
-[node name="Back to Menu" type="Button" parent="." unique_id=1527256303]
-offset_left = 75.0
-offset_top = 133.0
-offset_right = 506.0
-offset_bottom = 229.0
-theme_override_font_sizes/font_size = 64
-text = "Back to Menu"
-
 [node name="Gabe" type="CharacterBody2D" parent="." unique_id=1246424368]
-position = Vector2(150, 33)
+position = Vector2(220, 420)
 collision_layer = 3
 script = ExtResource("2_pn752")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Gabe" unique_id=2033020696]
-position = Vector2(46.999996, 297)
 scale = Vector2(0.9716981, 1.181318)
 sprite_frames = SubResource("SpriteFrames_i0xcd")
 animation = &"fly"
 
 [node name="Hitbox" type="CollisionShape2D" parent="Gabe" unique_id=1598061779]
-position = Vector2(70, 302)
+position = Vector2(0, 20)
 shape = SubResource("RectangleShape2D_grvo7")
 
 [node name="Attackbox" type="Area2D" parent="Gabe" unique_id=86574073]
-position = Vector2(12, 298)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gabe/Attackbox" unique_id=1791609555]
-position = Vector2(39, -1)
+position = Vector2(40, 20)
 shape = SubResource("RectangleShape2D_w6fme")
 
 [node name="Ground" type="StaticBody2D" parent="." unique_id=257714940]
-position = Vector2(34, 636)
+position = Vector2(640, 710)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=698105581]
-position = Vector2(688, 334)
 shape = SubResource("RectangleShape2D_2w3d0")
 
 [node name="Cieling" type="StaticBody2D" parent="." unique_id=1732242284]
-position = Vector2(0, 50)
-
-[node name="ColorRect" type="ColorRect" parent="Cieling" unique_id=1293499239]
-offset_left = 32.0
-offset_top = 22.0
-offset_right = 1312.0
-offset_bottom = 42.0
-color = Color(0.51615185, 0.111666985, 9.62615e-08, 1)
+position = Vector2(640, 10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cieling" unique_id=1772579446]
-position = Vector2(805, -82)
 shape = SubResource("RectangleShape2D_pn752")
 
 [node name="Wall" type="StaticBody2D" parent="." unique_id=343007777]
-position = Vector2(3, -3)
-
-[node name="ColorRect" type="ColorRect" parent="Wall" unique_id=1620591723]
-custom_minimum_size = Vector2(0, 786)
-offset_left = 1270.0
-offset_top = 47.0
-offset_right = 1310.0
-offset_bottom = 833.0
-color = Color(0.56294864, 0, 0, 1)
+position = Vector2(1270, 360)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall" unique_id=895526879]
-position = Vector2(1389, 390.5)
 shape = SubResource("RectangleShape2D_qmd12")
 
-[node name="Wall 2 Wall" type="StaticBody2D" parent="." unique_id=1170974065]
+[node name="WallLeft" type="StaticBody2D" parent="." unique_id=1170974065]
+position = Vector2(10, 360)
 
-[node name="ColorRect" type="ColorRect" parent="Wall 2 Wall" unique_id=885099006]
-offset_left = 17.0
-offset_top = 89.0
-offset_right = 48.0
-offset_bottom = 805.0
-color = Color(0.51584375, 0, 0, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall 2 Wall" unique_id=1981457586]
-position = Vector2(-173, 466)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft" unique_id=1981457586]
 shape = SubResource("RectangleShape2D_d828r")
 
 [node name="Spawner" type="Node" parent="." unique_id=1442172749]
 script = ExtResource("4_qmd12")
-
-[connection signal="pressed" from="Back to Menu" to="." method="_on_back_to_menu_pressed"]

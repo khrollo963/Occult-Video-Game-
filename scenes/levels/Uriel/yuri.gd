@@ -19,6 +19,7 @@ var gameover_instance: CanvasLayer = null
 
 func _ready() -> void:
 	health = max_health
+	anim.flip_h = true
 	_game_manager.set_health(health, max_health)
 
 

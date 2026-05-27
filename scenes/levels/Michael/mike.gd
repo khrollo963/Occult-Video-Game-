@@ -57,7 +57,7 @@ func _physics_process(delta: float) -> void:
 func start_attack() -> void:
 	attacking = true
 	attack_timer = ATTACK_DURATION
-	var attack_dir := -1.0 if anim.flip_h else 1.0
+	var attack_dir := 1.0 if anim.flip_h else -1.0
 	velocity.x = attack_dir * ATTACK_LUNGE
 	anim.play("attack")
 	attack_hitbox.monitoring = true
@@ -114,6 +114,6 @@ func update_animation() -> void:
 		anim.play("jump")
 	elif absf(velocity.x) > 10.0:
 		anim.play("walk")
-		anim.flip_h = velocity.x < 0.0
+		anim.flip_h = velocity.x > 0.0
 	else:
 		anim.play("idle")
