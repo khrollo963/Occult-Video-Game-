@@ -1,30 +1,242 @@
 [gd_scene format=3 uid="uid://ch0gkpxxqs5jx"]
 
 [ext_resource type="Script" uid="uid://druah4ymt4fm1" path="res://scenes/levels/Michael/mike_game.gd" id="1_h2j55"]
+[ext_resource type="Texture2D" uid="uid://d1rn7joy7krfb" path="res://assets/characters/Mike_lion.png" id="2_lmd0i"]
+[ext_resource type="Script" uid="uid://cfrp6ayk1wkau" path="res://scenes/levels/Michael/mike.gd" id="2_rpecu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpecu"]
+atlas = ExtResource("2_lmd0i")
+region = Rect2(0, 83, 60, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5cu0"]
+atlas = ExtResource("2_lmd0i")
+region = Rect2(60, 83, 60, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tipl5"]
+atlas = ExtResource("2_lmd0i")
+region = Rect2(120, 83, 60, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_806xt"]
+atlas = ExtResource("2_lmd0i")
+region = Rect2(180, 83, 60, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iss5o"]
+atlas = ExtResource("2_lmd0i")
+region = Rect2(240, 498, 60, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvfcw"]
+atlas = ExtResource("2_lmd0i")
+region = Rect2(240, 166, 60, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tbagm"]
+atlas = ExtResource("2_lmd0i")
+region = Rect2(0, 415, 60, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phc5u"]
+atlas = ExtResource("2_lmd0i")
+region = Rect2(60, 415, 60, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jxdci"]
+atlas = ExtResource("2_lmd0i")
+region = Rect2(60, 166, 60, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wm4c"]
+atlas = ExtResource("2_lmd0i")
+region = Rect2(120, 166, 60, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjawf"]
+atlas = ExtResource("2_lmd0i")
+region = Rect2(180, 166, 60, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w83me"]
+atlas = ExtResource("2_lmd0i")
+region = Rect2(240, 166, 60, 83)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ro44p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rpecu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5cu0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tipl5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_806xt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iss5o")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvfcw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tbagm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phc5u")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jxdci")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wm4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjawf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w83me")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmd0i"]
+size = Vector2(70.25, 74.91016)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5yali"]
+size = Vector2(1355, 138)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rpecu"]
+size = Vector2(74, 726)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5cu0"]
+size = Vector2(62, 810)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tipl5"]
+size = Vector2(216.5, 55)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_806xt"]
+size = Vector2(231, 55)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iss5o"]
+size = Vector2(231, 55)
 
 [node name="Mike Game" type="Node2D" unique_id=396734271]
 script = ExtResource("1_h2j55")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=358520021]
 custom_minimum_size = Vector2(1280, 720)
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 12.0
+offset_top = 36.0
+offset_right = 1292.0
+offset_bottom = 756.0
 color = Color(1, 0, 0, 1)
 
 [node name="Label" type="Label" parent="." unique_id=930061720]
-offset_left = 178.0
-offset_top = 323.0
-offset_right = 1097.0
-offset_bottom = 502.0
+offset_left = 723.0
+offset_top = 23.0
+offset_right = 1302.0
+offset_bottom = 293.0
 theme_override_font_sizes/font_size = 64
-text = "Mike's Platform Coming soon!
+text = "Mike's Platformer
+
 "
 
 [node name="Back to Menu" type="Button" parent="." unique_id=1588407840]
-offset_right = 8.0
-offset_bottom = 8.0
-theme_override_font_sizes/font_size = 64
+offset_left = 14.0
+offset_top = 44.0
+offset_right = 302.0
+offset_bottom = 98.0
+theme_override_font_sizes/font_size = 33
 text = "Back to Menu
 "
+
+[node name="Mike" type="CharacterBody2D" parent="." unique_id=50445330]
+script = ExtResource("2_rpecu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Mike" unique_id=727923660]
+position = Vector2(1220, 534.99994)
+scale = Vector2(1.9833337, 1.7951812)
+sprite_frames = SubResource("SpriteFrames_ro44p")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mike" unique_id=107361580]
+position = Vector2(1231, 543)
+shape = SubResource("RectangleShape2D_lmd0i")
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=563993583]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=1388203329]
+position = Vector2(674, 664)
+shape = SubResource("RectangleShape2D_5yali")
+
+[node name="ColorRect" type="ColorRect" parent="Ground" unique_id=819867349]
+custom_minimum_size = Vector2(1280, 67)
+offset_top = 594.0
+offset_right = 1290.0
+offset_bottom = 757.0
+color = Color(0, 0, 1, 1)
+
+[node name="Invisible Wall" type="StaticBody2D" parent="." unique_id=1316773240]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Invisible Wall" unique_id=1809139582]
+position = Vector2(35, 372)
+shape = SubResource("RectangleShape2D_rpecu")
+
+[node name="Invisi Wall" type="StaticBody2D" parent="." unique_id=907846123]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Invisi Wall" unique_id=331985576]
+position = Vector2(1314, 428)
+shape = SubResource("RectangleShape2D_o5cu0")
+
+[node name="Platform" type="StaticBody2D" parent="." unique_id=382145838]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform" unique_id=139065705]
+position = Vector2(954, 492)
+shape = SubResource("RectangleShape2D_tipl5")
+
+[node name="ColorRect" type="ColorRect" parent="Platform" unique_id=1737930956]
+custom_minimum_size = Vector2(231, 55)
+offset_left = 843.0
+offset_top = 464.0
+offset_right = 1074.0
+offset_bottom = 519.0
+color = Color(0, 0.543951, 0, 1)
+
+[node name="Platform 2" type="StaticBody2D" parent="." unique_id=724017050]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform 2" unique_id=1164775921]
+position = Vector2(633, 392)
+shape = SubResource("RectangleShape2D_806xt")
+
+[node name="ColorRect" type="ColorRect" parent="Platform 2" unique_id=1050566781]
+offset_left = 519.0
+offset_top = 365.0
+offset_right = 750.0
+offset_bottom = 419.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1676746843]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1005503797]
+position = Vector2(206, 326)
+shape = SubResource("RectangleShape2D_iss5o")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D" unique_id=276898678]
+offset_left = 15.0
+offset_top = 297.0
+offset_right = 328.0
+offset_bottom = 352.0
+color = Color(0.11774104, 1, 1, 1)
 
 [connection signal="pressed" from="Back to Menu" to="." method="_on_back_to_menu_pressed"]
