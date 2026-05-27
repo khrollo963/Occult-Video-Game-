@@ -66,6 +66,7 @@ YURI_ANIMS: dict[str, list[tuple[int, int, int, int]]] = {
         rect(298, 96, 149, 96),
     ],
     "jump": [rect(0, 96, 149, 96)],
+    "duck": [rect(298, 0, 149, 96)],
 }
 
 RALPH_ANIMS: dict[str, list[tuple[int, int, int, int]]] = {
@@ -99,7 +100,7 @@ CHARACTERS = {
         "texture": "res://assets/characters/Yuri Bull.png",
         "file": CHAR_DIR / "Yuri Bull.png",
         "animations": YURI_ANIMS,
-        "speeds": {"idle": 5.0, "run": 10.0, "jump": 5.0},
+        "speeds": {"idle": 5.0, "run": 10.0, "jump": 5.0, "duck": 5.0},
     },
     "ralph_char": {
         "texture": "res://assets/characters/Ralph_char.png",

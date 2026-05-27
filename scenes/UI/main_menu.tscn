@@ -20,7 +20,20 @@ script = ExtResource("1_e2p27")
 
 [node name="SimpleGradientBg" parent="." instance=ExtResource("5_bg")]
 
-[node name="Stars" type="Control" parent="."]
+[node name="LegacyBackground" type="CanvasLayer" parent="."]
+visible = false
+layer = -10
+
+[node name="Fill" type="ColorRect" parent="LegacyBackground"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.372804, 0.217168, 0.588794, 1)
+
+[node name="SkyOverlay" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,7 +42,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Star1" type="ColorRect" parent="Stars"]
+[node name="Star1" type="ColorRect" parent="SkyOverlay"]
 layout_mode = 0
 offset_left = 120.0
 offset_top = 90.0
@@ -37,7 +50,7 @@ offset_right = 126.0
 offset_bottom = 96.0
 color = Color(1, 1, 0.8, 0.7)
 
-[node name="Star2" type="ColorRect" parent="Stars"]
+[node name="Star2" type="ColorRect" parent="SkyOverlay"]
 layout_mode = 0
 offset_left = 340.0
 offset_top = 140.0
@@ -45,7 +58,7 @@ offset_right = 346.0
 offset_bottom = 146.0
 color = Color(1, 1, 0.9, 0.55)
 
-[node name="Star3" type="ColorRect" parent="Stars"]
+[node name="Star3" type="ColorRect" parent="SkyOverlay"]
 layout_mode = 0
 offset_left = 890.0
 offset_top = 70.0
@@ -53,7 +66,7 @@ offset_right = 896.0
 offset_bottom = 76.0
 color = Color(1, 1, 0.85, 0.65)
 
-[node name="Star4" type="ColorRect" parent="Stars"]
+[node name="Star4" type="ColorRect" parent="SkyOverlay"]
 layout_mode = 0
 offset_left = 1050.0
 offset_top = 180.0
@@ -61,7 +74,7 @@ offset_right = 1056.0
 offset_bottom = 186.0
 color = Color(1, 1, 0.75, 0.5)
 
-[node name="Star5" type="ColorRect" parent="Stars"]
+[node name="Star5" type="ColorRect" parent="SkyOverlay"]
 layout_mode = 0
 offset_left = 620.0
 offset_top = 50.0
@@ -204,8 +217,24 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Start Game"
 
+[node name="SettingsButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -148.0
+offset_right = 80.0
+offset_bottom = -104.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Settings"
+
 [connection signal="pressed" from="CharacterRow/CardYuri/VBox/ButtonYuri" to="." method="_on_button_yuri_pressed"]
 [connection signal="pressed" from="CharacterRow/CardRaph/VBox/ButtonRaph" to="." method="_on_button_raph_pressed"]
 [connection signal="pressed" from="CharacterRow/CardGabe/VBox/ButtonGabe" to="." method="_on_button_gabe_pressed"]
 [connection signal="pressed" from="CharacterRow/CardMike/VBox/ButtonMike" to="." method="_on_button_mike_pressed"]
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]

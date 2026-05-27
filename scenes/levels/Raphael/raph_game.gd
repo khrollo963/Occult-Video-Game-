@@ -8,12 +8,14 @@ const PLATFORM_SCENE := preload("res://scenes/levels/Raphael/raph_platform.tscn"
 @export var max_platform_gap := 130.0
 
 @onready var _game_manager: Node = get_node("/root/GameManager")
+@onready var _settings: Node = get_node("/root/SettingsManager")
 @onready var player: CharacterBody2D = $Player
 @onready var camera: Camera2D = $Camera2D
 @onready var platforms: Node2D = $Platforms
 
 var highest_y := 0.0
 var spawn_cursor_y := 0.0
+var gap_multiplier := 1.0
 var rng := RandomNumberGenerator.new()
 
 
@@ -22,6 +24,10 @@ func _ready() -> void:
 	camera.make_current()
 	add_child(HUD_SCENE.instantiate())
 	_configure_background()
+	_apply_background()
+	_apply_game_options()
+	_settings.background_style_changed.connect(_on_background_style_changed)
+	_settings.game_options_changed.connect(_on_game_options_changed)
 	_game_manager.set_score(0)
 	_game_manager.set_stat("Height", 0)
 	_spawn_starting_platforms()
@@ -33,6 +39,14 @@ func _configure_background() -> void:
 	gradient.bottom_color = Color(0.92, 0.78, 0.55, 1.0)
 
 
+func _apply_background() -> void:
+	BackgroundApplier.apply(self, BackgroundApplier.LEGACY_RAPH)
+
+
+func _apply_game_options() -> void:
+	gap_multiplier = _settings.raph_platform_gap
+
+
 func _spawn_starting_platforms() -> void:
 	spawn_cursor_y = 620.0
 	_spawn_platform(Vector2(640.0, 620.0))
@@ -41,7 +55,9 @@ func _spawn_starting_platforms() -> void:
 
 
 func _spawn_platform_above() -> void:
-	spawn_cursor_y -= rng.randf_range(min_platform_gap, max_platform_gap)
+	var min_gap := min_platform_gap * gap_multiplier
+	var max_gap := max_platform_gap * gap_multiplier
+	spawn_cursor_y -= rng.randf_range(min_gap, max_gap)
 	var x := rng.randf_range(120.0, 1160.0)
 	_spawn_platform(Vector2(x, spawn_cursor_y))
 
@@ -81,6 +97,14 @@ func _cleanup_platforms() -> void:
 	for child in platforms.get_children():
 		if child.global_position.y > cutoff:
 			child.queue_free()
+
+
+func _on_background_style_changed(_style: String) -> void:
+	_apply_background()
+
+
+func _on_game_options_changed() -> void:
+	_apply_game_options()
 
 
 func _on_back_to_menu_pressed() -> void:

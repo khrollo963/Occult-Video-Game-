@@ -1,0 +1,209 @@
+[gd_scene load_steps=5 format=3 uid="uid://settingsmenu001"]
+
+[ext_resource type="Script" path="res://scenes/UI/settings.gd" id="1_settings"]
+[ext_resource type="PackedScene" uid="uid://bgrad001simple" path="res://scenes/UI/simple_gradient_bg.tscn" id="2_bg"]
+[ext_resource type="Theme" uid="uid://arcade_theme001" path="res://assets/ui/arcade_theme.tres" id="3_theme"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_theme")
+script = ExtResource("1_settings")
+
+[node name="SimpleGradientBg" parent="." instance=ExtResource("2_bg")]
+
+[node name="LegacyBackground" type="CanvasLayer" parent="."]
+visible = false
+layer = -10
+
+[node name="Fill" type="ColorRect" parent="LegacyBackground"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.372804, 0.217168, 0.588794, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 24
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0.164706, 1)
+theme_override_font_sizes/font_size = 56
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBox/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/VBox/ScrollContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="BackgroundRow" type="HBoxContainer" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox"]
+layout_mode = 2
+
+[node name="BackgroundLabel" type="Label" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/BackgroundRow"]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+text = "Background Style"
+
+[node name="BackgroundOption" type="OptionButton" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/BackgroundRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MikeRow" type="HBoxContainer" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox"]
+layout_mode = 2
+
+[node name="MikeLabel" type="Label" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/MikeRow"]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+text = "Mike: Enemy Count"
+
+[node name="MikeSlider" type="HSlider" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/MikeRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 5.0
+step = 1.0
+value = 3.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="MikeValue" type="Label" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/MikeRow"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "3"
+horizontal_alignment = 2
+
+[node name="GabeRow" type="HBoxContainer" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox"]
+layout_mode = 2
+
+[node name="GabeLabel" type="Label" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/GabeRow"]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+text = "Gabe: Spawn Rate"
+
+[node name="GabeSlider" type="HSlider" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/GabeRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.5
+max_value = 2.0
+step = 0.1
+value = 1.0
+
+[node name="GabeValue" type="Label" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/GabeRow"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "1.0x"
+horizontal_alignment = 2
+
+[node name="YuriSpeedRow" type="HBoxContainer" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox"]
+layout_mode = 2
+
+[node name="YuriSpeedLabel" type="Label" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/YuriSpeedRow"]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+text = "Yuri: Scroll Speed"
+
+[node name="YuriSpeedSlider" type="HSlider" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/YuriSpeedRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.6
+max_value = 1.4
+step = 0.1
+value = 1.0
+
+[node name="YuriSpeedValue" type="Label" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/YuriSpeedRow"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "1.0x"
+horizontal_alignment = 2
+
+[node name="YuriObstacleRow" type="HBoxContainer" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox"]
+layout_mode = 2
+
+[node name="YuriObstacleLabel" type="Label" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/YuriObstacleRow"]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+text = "Yuri: Obstacle Rate"
+
+[node name="YuriObstacleSlider" type="HSlider" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/YuriObstacleRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.5
+max_value = 2.0
+step = 0.1
+value = 1.0
+
+[node name="YuriObstacleValue" type="Label" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/YuriObstacleRow"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "1.0x"
+horizontal_alignment = 2
+
+[node name="RaphRow" type="HBoxContainer" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox"]
+layout_mode = 2
+
+[node name="RaphLabel" type="Label" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/RaphRow"]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+text = "Raph: Platform Gap"
+
+[node name="RaphSlider" type="HSlider" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/RaphRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.7
+max_value = 1.5
+step = 0.1
+value = 1.0
+
+[node name="RaphValue" type="Label" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/RaphRow"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "1.0x"
+horizontal_alignment = 2
+
+[node name="HintLabel" type="Label" parent="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Yuri duck: hold S or Down arrow under overhead beams."
+autowrap_mode = 2
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back to Menu"
+
+[connection signal="item_selected" from="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/BackgroundRow/BackgroundOption" to="." method="_on_background_option_item_selected"]
+[connection signal="value_changed" from="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/MikeRow/MikeSlider" to="." method="_on_mike_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/GabeRow/GabeSlider" to="." method="_on_gabe_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/YuriSpeedRow/YuriSpeedSlider" to="." method="_on_yuri_speed_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/YuriObstacleRow/YuriObstacleSlider" to="." method="_on_yuri_obstacle_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBox/ScrollContainer/PanelContainer/VBox/RaphRow/RaphSlider" to="." method="_on_raph_slider_value_changed"]
+[connection signal="pressed" from="MarginContainer/VBox/BackButton" to="." method="_on_back_pressed"]

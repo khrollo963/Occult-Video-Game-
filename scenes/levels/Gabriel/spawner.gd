@@ -7,6 +7,7 @@ extends Node
 
 var collectible_timer := 0.0
 var hazard_timer := 0.0
+var spawn_rate := 1.0
 
 
 func _process(delta: float) -> void:
@@ -14,18 +15,22 @@ func _process(delta: float) -> void:
 	handle_hazards(delta)
 
 
+func apply_spawn_rate(rate: float) -> void:
+	spawn_rate = maxf(rate, 0.1)
+
+
 func handle_collectibles(delta: float) -> void:
-	collectible_timer -= delta
+	collectible_timer -= delta * spawn_rate
 	if collectible_timer <= 0.0:
 		spawn_collectible()
-		collectible_timer = 0.75
+		collectible_timer = 0.75 / spawn_rate
 
 
 func handle_hazards(delta: float) -> void:
-	hazard_timer -= delta
+	hazard_timer -= delta * spawn_rate
 	if hazard_timer <= 0.0:
 		spawn_hazard()
-		hazard_timer = randf_range(4.5, 7.0)
+		hazard_timer = randf_range(4.5, 7.0) / spawn_rate
 
 
 func spawn_collectible() -> void:

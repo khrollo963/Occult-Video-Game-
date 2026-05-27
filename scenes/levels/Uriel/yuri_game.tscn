@@ -17,6 +17,19 @@ script = ExtResource("1_nhjq3")
 
 [node name="SimpleGradientBg" parent="." instance=ExtResource("4_bg")]
 
+[node name="LegacyBackground" type="CanvasLayer" parent="."]
+visible = false
+layer = -10
+
+[node name="Fill" type="ColorRect" parent="LegacyBackground"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.08, 0.25, 0.12, 1)
+
 [node name="SkyOverlay" type="CanvasLayer" parent="."]
 layer = -9
 

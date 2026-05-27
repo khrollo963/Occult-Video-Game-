@@ -5,6 +5,7 @@ const ENEMY_SCENE := preload("res://scenes/levels/Michael/enemy.tscn")
 const GOAL_SCENE := preload("res://scenes/levels/Michael/level_goal.tscn")
 
 @onready var _game_manager: Node = get_node("/root/GameManager")
+@onready var _settings: Node = get_node("/root/SettingsManager")
 @onready var mike: CharacterBody2D = $Mike
 @onready var status_label: Label = $StatusLabel
 
@@ -14,6 +15,9 @@ var level_goal: Area2D
 func _ready() -> void:
 	add_child(HUD_SCENE.instantiate())
 	_configure_background()
+	_apply_background()
+	_settings.background_style_changed.connect(_on_background_style_changed)
+	_settings.game_options_changed.connect(_on_game_options_changed)
 	_game_manager.set_score(0)
 	_game_manager.set_stat("Level", 1)
 	_spawn_enemies()
@@ -21,10 +25,11 @@ func _ready() -> void:
 
 
 func _spawn_enemies() -> void:
-	var spawn_points := [Vector2(520, 560), Vector2(820, 560), Vector2(980, 430)]
-	for point in spawn_points:
+	var spawn_points := [Vector2(520, 560), Vector2(820, 560), Vector2(980, 430), Vector2(680, 430), Vector2(1100, 560)]
+	var count := mini(_settings.mike_enemy_count, spawn_points.size())
+	for i in count:
 		var enemy := ENEMY_SCENE.instantiate()
-		enemy.global_position = point
+		enemy.global_position = spawn_points[i]
 		add_child(enemy)
 
 
@@ -39,6 +44,18 @@ func _configure_background() -> void:
 	var gradient: ColorRect = $SimpleGradientBg.get_node("Gradient")
 	gradient.top_color = Color(0.12, 0.18, 0.42, 1.0)
 	gradient.bottom_color = Color(0.04, 0.06, 0.18, 1.0)
+
+
+func _apply_background() -> void:
+	BackgroundApplier.apply(self, BackgroundApplier.LEGACY_MIKE)
+
+
+func _on_background_style_changed(_style: String) -> void:
+	_apply_background()
+
+
+func _on_game_options_changed() -> void:
+	pass
 
 
 func _on_level_completed() -> void:
