@@ -2,6 +2,7 @@ extends Node2D
 
 const HUD_SCENE := preload("res://scenes/UI/hud.tscn")
 const SceneNav := preload("res://scripts/scene_nav.gd")
+const ParallaxSetup := preload("res://scripts/parallax_setup.gd")
 const ENEMY_SCENE := preload("res://scenes/levels/Michael/enemy.tscn")
 const GOAL_SCENE := preload("res://scenes/levels/Michael/level_goal.tscn")
 
@@ -128,11 +129,9 @@ func get_player_position() -> Vector2:
 
 
 func _add_parallax() -> void:
-	var bg := ParallaxBackground.new()
-	bg.set_script(load("res://scripts/parallax_setup.gd"))
-	bg.layer_colors = [
+	var bg := ParallaxSetup.create([
 		Color(0.05, 0.08, 0.22, 0.8),
 		Color(0.08, 0.12, 0.28, 0.6),
-	]
+	])
 	add_child(bg)
 	move_child(bg, 1)

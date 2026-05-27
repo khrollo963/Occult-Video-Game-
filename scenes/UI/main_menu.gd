@@ -35,10 +35,10 @@ func _ready() -> void:
 
 func _apply_button_sheen() -> void:
 	var buttons: Array[Button] = [
-		$StartButton,
-		$SettingsButton,
-		$ScriptureButton,
-		$LeaderboardButton,
+		$BottomNav/StartButton,
+		$BottomNav/SettingsButton,
+		$BottomNav/ScriptureButton,
+		$BottomNav/LeaderboardButton,
 		$LoreButton,
 		$AboutButton,
 		$CharacterRow/CardYuri/VBox/ButtonYuri,

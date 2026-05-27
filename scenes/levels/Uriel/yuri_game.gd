@@ -2,8 +2,10 @@ extends Node2D
 
 const HUD_SCENE := preload("res://scenes/UI/hud.tscn")
 const SceneNav := preload("res://scripts/scene_nav.gd")
+const ParallaxSetup := preload("res://scripts/parallax_setup.gd")
 const OBSTACLE_SCENE := preload("res://scenes/levels/Uriel/obstacle.tscn")
 const OVERHEAD_SCENE := preload("res://scenes/levels/Uriel/obstacle_overhead.tscn")
+const POWERUP_SCENE := preload("res://scenes/levels/Uriel/powerup_pickup.tscn")
 
 @export var base_scroll_speed := 320.0
 @export var max_scroll_speed := 650.0
@@ -86,23 +88,16 @@ func handle_powerups(delta: float) -> void:
 
 
 func _spawn_powerup_pickup() -> void:
-	var area := Area2D.new()
-	var shape := CollisionShape2D.new()
-	var rect := RectangleShape2D.new()
-	rect.size = Vector2(28, 28)
-	shape.shape = rect
-	area.add_child(shape)
-	var sprite := ColorRect.new()
-	sprite.size = Vector2(24, 24)
-	sprite.color = Color(0.9, 0.85, 0.2)
-	area.add_child(sprite)
-	area.position = Vector2(1350.0, randf_range(420.0, 560.0))
-	area.body_entered.connect(func(body):
-		if body == yuri:
-			_apply_random_powerup()
-			area.queue_free()
-	)
-	add_child(area)
+	var pickup := POWERUP_SCENE.instantiate()
+	pickup.position = Vector2(1350.0, randf_range(420.0, 560.0))
+	pickup.speed = scroll_speed
+	if pickup.has_method("set_game"):
+		pickup.set_game(self)
+	add_child(pickup)
+
+
+func collect_powerup() -> void:
+	_apply_random_powerup()
 
 
 func _apply_random_powerup() -> void:
@@ -183,11 +178,9 @@ func get_player_position() -> Vector2:
 
 
 func _add_parallax() -> void:
-	var bg := ParallaxBackground.new()
-	bg.set_script(load("res://scripts/parallax_setup.gd"))
-	bg.layer_colors = [
+	var bg := ParallaxSetup.create([
 		Color(0.35, 0.12, 0.35, 0.5),
 		Color(0.2, 0.45, 0.22, 0.45),
-	]
+	])
 	add_child(bg)
 	move_child(bg, 1)

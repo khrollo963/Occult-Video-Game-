@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://yuri_powerup01"]
+
+[ext_resource type="Script" path="res://scenes/levels/Uriel/powerup_pickup.gd" id="1_pickup"]
+[ext_resource type="Texture2D" path="res://assets/obstacles/sigil.png" id="2_tex"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pickup"]
+radius = 14.0
+
+[node name="PowerupPickup" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+monitoring = true
+script = ExtResource("1_pickup")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.95, 0.35, 1)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("2_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pickup")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

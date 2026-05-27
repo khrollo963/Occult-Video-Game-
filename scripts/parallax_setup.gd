@@ -1,11 +1,21 @@
 extends ParallaxBackground
 
+class_name ParallaxSetup
+
 @export var layer_colors: Array[Color] = [
 	Color(0.08, 0.05, 0.18, 0.9),
 	Color(0.15, 0.08, 0.28, 0.75),
 	Color(0.25, 0.12, 0.35, 0.55),
 ]
 @export var scroll_speeds: Array[float] = [0.15, 0.35, 0.6]
+
+
+static func create(colors: Array[Color], speeds: Array[float] = []) -> ParallaxSetup:
+	var bg := ParallaxSetup.new()
+	bg.layer_colors = colors
+	if not speeds.is_empty():
+		bg.scroll_speeds = speeds
+	return bg
 
 
 func _ready() -> void:

@@ -34,11 +34,14 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 func take_damage(amount := 1) -> void:
 	health -= amount
 	sprite.modulate = Color(1.0, 0.5, 0.5)
-	get_node("/root/EventBus").enemy_killed.emit()
 	get_node("/root/VfxManager").spawn("hit_spark", global_position)
+	var killed := health <= 0
+	if not killed:
+		get_node("/root/AudioManager").play_sfx("hit")
 	await get_tree().create_timer(0.08).timeout
 	sprite.modulate = Color.WHITE
 
-	if health <= 0:
+	if killed:
+		get_node("/root/EventBus").enemy_killed.emit()
 		get_node("/root/VfxManager").spawn("death_poof", global_position)
 		queue_free()

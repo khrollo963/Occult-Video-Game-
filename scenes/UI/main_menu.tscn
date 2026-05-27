@@ -106,9 +106,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -470.0
-offset_top = -170.0
+offset_top = -250.0
 offset_right = 470.0
-offset_bottom = 150.0
+offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 24
@@ -202,65 +202,41 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Play Mike"
 
-[node name="StartButton" type="Button" parent="."]
+[node name="BottomNav" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -80.0
-offset_top = -100.0
-offset_right = 80.0
-offset_bottom = -56.0
+offset_left = -100.0
+offset_top = -196.0
+offset_right = 100.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Start Game"
+theme_override_constants/separation = 8
+alignment = 1
 
-[node name="SettingsButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -80.0
-offset_top = -148.0
-offset_right = 80.0
-offset_bottom = -104.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Settings"
+[node name="LeaderboardButton" type="Button" parent="BottomNav"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Leaderboard"
 
-[node name="ScriptureButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -80.0
-offset_top = -244.0
-offset_right = 80.0
-offset_bottom = -200.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="ScriptureButton" type="Button" parent="BottomNav"]
+layout_mode = 2
+size_flags_horizontal = 4
 text = "Scripture"
 
-[node name="LeaderboardButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -80.0
-offset_top = -292.0
-offset_right = 80.0
-offset_bottom = -248.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Leaderboard"
+[node name="SettingsButton" type="Button" parent="BottomNav"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Settings"
+
+[node name="StartButton" type="Button" parent="BottomNav"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Start Game"
 
 [node name="RandomSplash" type="CanvasLayer" parent="."]
 layer = 50
@@ -320,9 +296,9 @@ text = "Dev Team"
 [connection signal="pressed" from="CharacterRow/CardRaph/VBox/ButtonRaph" to="." method="_on_button_raph_pressed"]
 [connection signal="pressed" from="CharacterRow/CardGabe/VBox/ButtonGabe" to="." method="_on_button_gabe_pressed"]
 [connection signal="pressed" from="CharacterRow/CardMike/VBox/ButtonMike" to="." method="_on_button_mike_pressed"]
-[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
-[connection signal="pressed" from="ScriptureButton" to="." method="_on_scripture_button_pressed"]
-[connection signal="pressed" from="LeaderboardButton" to="." method="_on_leaderboard_button_pressed"]
+[connection signal="pressed" from="BottomNav/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="BottomNav/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="BottomNav/ScriptureButton" to="." method="_on_scripture_button_pressed"]
+[connection signal="pressed" from="BottomNav/LeaderboardButton" to="." method="_on_leaderboard_button_pressed"]
 [connection signal="pressed" from="LoreButton" to="." method="_on_lore_button_pressed"]
 [connection signal="pressed" from="AboutButton" to="." method="_on_about_button_pressed"]
