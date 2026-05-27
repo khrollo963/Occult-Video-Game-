@@ -104,17 +104,39 @@ func _go_game(game_id: String) -> void:
 func _show_initials_prompt() -> void:
 	var dialog := AcceptDialog.new()
 	dialog.title = "Arcade Initials"
-	dialog.dialog_text = "Enter 3 letters or numbers for the global leaderboard:"
+	dialog.dialog_text = ""
+	dialog.min_size = Vector2i(420, 160)
+
+	var margin := MarginContainer.new()
+	margin.add_theme_constant_override("margin_left", 16)
+	margin.add_theme_constant_override("margin_right", 16)
+	margin.add_theme_constant_override("margin_top", 12)
+	margin.add_theme_constant_override("margin_bottom", 8)
+
+	var vbox := VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 12)
+
+	var prompt := Label.new()
+	prompt.text = "Enter 3 letters or numbers for the global leaderboard:"
+	prompt.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+
 	var edit := LineEdit.new()
 	edit.max_length = 3
-	edit.custom_minimum_size = Vector2(120, 0)
-	dialog.add_child(edit)
+	edit.placeholder_text = "ABC"
+	edit.custom_minimum_size = Vector2(160, 0)
+
+	vbox.add_child(prompt)
+	vbox.add_child(edit)
+	margin.add_child(vbox)
+	dialog.add_child(margin)
+
 	dialog.confirmed.connect(func():
 		if not _settings.set_initials(edit.text):
 			_settings.set_initials("GLQ")
 	)
 	add_child(dialog)
 	dialog.popup_centered()
+	edit.grab_focus.call_deferred()
 
 
 func _on_start_button_pressed() -> void:

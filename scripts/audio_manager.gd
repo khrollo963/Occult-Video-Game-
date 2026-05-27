@@ -1,5 +1,8 @@
 extends Node
 
+## Procedural SFX/music scaffold. Set to true when real audio assets are wired up.
+const AUDIO_ENABLED := false
+
 const SFX := {
 	"ui_click": {"freq": 880.0, "duration": 0.06, "volume": -8.0},
 	"jump": {"freq": 520.0, "duration": 0.08, "volume": -10.0},
@@ -26,6 +29,8 @@ func _ready() -> void:
 		player.bus = "SFX"
 		add_child(player)
 		_sfx_players.append(player)
+	if not AUDIO_ENABLED:
+		return
 	get_node("/root/EventBus").player_damaged.connect(func(_a): play_sfx("hit"))
 	get_node("/root/EventBus").collectible_picked.connect(func(_v): play_sfx("pickup"))
 	get_node("/root/EventBus").enemy_killed.connect(func(): play_sfx("hit"))
@@ -55,6 +60,8 @@ func _setup_buses() -> void:
 
 
 func play_sfx(id: String) -> void:
+	if not AUDIO_ENABLED:
+		return
 	if not SFX.has(id):
 		return
 	var spec: Dictionary = SFX[id]
@@ -72,6 +79,8 @@ func play_ui_click() -> void:
 
 
 func play_music(_track_id := "menu") -> void:
+	if not AUDIO_ENABLED:
+		return
 	if _music_player.playing:
 		return
 	_music_player.stream = _make_tone(220.0, 4.0, true)
@@ -79,6 +88,8 @@ func play_music(_track_id := "menu") -> void:
 
 
 func duck_music() -> void:
+	if not AUDIO_ENABLED:
+		return
 	var tween := create_tween()
 	tween.tween_property(_music_player, "volume_db", -22.0, 0.15)
 	tween.tween_property(_music_player, "volume_db", -14.0, 0.4)

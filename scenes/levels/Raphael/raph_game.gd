@@ -87,9 +87,9 @@ func _spawn_platform_above() -> void:
 func _spawn_platform(pos: Vector2, kind: String) -> void:
 	var platform := PLATFORM_SCENE.instantiate()
 	platform.position = pos
+	platforms.add_child(platform)
 	if platform.has_method("setup"):
 		platform.setup(kind)
-	platforms.add_child(platform)
 
 
 func _process(_delta: float) -> void:
