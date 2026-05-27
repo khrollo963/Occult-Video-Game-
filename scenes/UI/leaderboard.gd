@@ -49,7 +49,9 @@ func _on_background_style_changed(_style: String) -> void:
 
 func _refresh() -> void:
 	status_label.text = "Loading..."
-	var game_id: String = filter_option.get_item_metadata(filter_option.selected)
+	var game_id: String = str(filter_option.get_item_metadata(filter_option.selected))
+	if game_id.is_empty():
+		game_id = "all"
 	_leaderboard.fetch_top(game_id, 15)
 
 

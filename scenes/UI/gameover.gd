@@ -16,8 +16,10 @@ func _ready() -> void:
 	else:
 		score_banner.text = ""
 	var bus: Node = get_node("/root/EventBus")
+	var leaderboard: Node = get_node("/root/LeaderboardService")
 	bus.score_submitted.connect(_on_score_submitted)
 	bus.leaderboard_ranked.connect(_on_leaderboard_ranked)
+	leaderboard.submit_failed.connect(_on_submit_failed)
 
 
 func _append_banner(line: String) -> void:
@@ -31,6 +33,12 @@ func _on_score_submitted(game_id: String, _score: int, success: bool) -> void:
 	if not success or game_id != _game_manager().current_game_id:
 		return
 	_append_banner("Submitted to leaderboard!")
+
+
+func _on_submit_failed(game_id: String, _score: int, message: String) -> void:
+	if game_id != _game_manager().current_game_id:
+		return
+	_append_banner("Leaderboard: %s" % message)
 
 
 func _on_leaderboard_ranked(game_id: String, _score: int, rank: int) -> void:
