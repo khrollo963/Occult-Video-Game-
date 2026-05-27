@@ -47,11 +47,14 @@ offset_right = 1040.0
 offset_bottom = 560.0
 color = Color(0.1, 0.24, 0.08, 1)
 
-[node name="BackToMenu" type="Button" parent="."]
+[node name="GameUI" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="BackToMenu" type="Button" parent="GameUI"]
 offset_left = 16.0
-offset_top = 16.0
+offset_top = 56.0
 offset_right = 220.0
-offset_bottom = 56.0
+offset_bottom = 96.0
 theme = ExtResource("5_theme")
 text = "Back to Menu"
 
@@ -84,4 +87,4 @@ animation = &"idle"
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_body")
 
-[connection signal="pressed" from="BackToMenu" to="." method="_on_back_to_menu_pressed"]
+[connection signal="pressed" from="GameUI/BackToMenu" to="." method="_on_back_to_menu_pressed"]

@@ -8,18 +8,24 @@ const GOAL_SCENE := preload("res://scenes/levels/Michael/level_goal.tscn")
 @onready var _settings: Node = get_node("/root/SettingsManager")
 @onready var mike: CharacterBody2D = $Mike
 @onready var status_label: Label = $StatusLabel
+@onready var next_level_button: Button = $GameUI/NextLevelButton
 
 var level_goal: Area2D
 
 
 func _ready() -> void:
+	if not _game_manager.mike_advance_level:
+		_game_manager.mike_level = 1
+	else:
+		_game_manager.mike_advance_level = false
+
 	add_child(HUD_SCENE.instantiate())
 	_configure_background()
 	_apply_background()
 	_settings.background_style_changed.connect(_on_background_style_changed)
 	_settings.game_options_changed.connect(_on_game_options_changed)
 	_game_manager.set_score(0)
-	_game_manager.set_stat("Level", 1)
+	_game_manager.set_stat("Level", _game_manager.mike_level)
 	_spawn_enemies()
 	_spawn_goal()
 
@@ -63,7 +69,16 @@ func _on_level_completed() -> void:
 	_game_manager.set_score(1000)
 	mike.set_physics_process(false)
 	mike.velocity = Vector2.ZERO
+	next_level_button.visible = true
+
+
+func _on_next_level_pressed() -> void:
+	_game_manager.mike_level += 1
+	_game_manager.mike_advance_level = true
+	get_tree().reload_current_scene()
 
 
 func _on_back_to_menu_pressed() -> void:
+	_game_manager.mike_level = 1
+	_game_manager.mike_advance_level = false
 	get_tree().change_scene_to_file("res://scenes/UI/main_menu.tscn")

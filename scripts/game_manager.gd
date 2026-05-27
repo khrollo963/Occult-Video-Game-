@@ -12,6 +12,8 @@ var _stat_value := 0
 var _has_health := false
 var _has_score := false
 var _has_stat := false
+var mike_level := 1
+var mike_advance_level := false
 
 
 func set_health(current: int, maximum: int) -> void:
