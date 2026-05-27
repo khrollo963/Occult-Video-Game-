@@ -82,3 +82,15 @@ func _on_background_style_changed(_style: String) -> void:
 
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/UI/main_menu.tscn")
+
+
+func _on_lore_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/UI/lore.tscn")
+
+
+func _on_about_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/UI/about.tscn")
+
+
+func _on_exit_pressed() -> void:
+	get_tree().quit()

@@ -38,6 +38,10 @@ func _on_settings_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/UI/settings.tscn")
 
 
+func _on_scripture_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/UI/scripture.tscn")
+
+
 func _on_button_mike_pressed() -> void:
 	get_tree().change_scene_to_file(GAME_SCENES[0])
 

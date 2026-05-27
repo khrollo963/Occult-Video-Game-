@@ -232,9 +232,25 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Settings"
 
+[node name="ScriptureButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -196.0
+offset_right = 80.0
+offset_bottom = -152.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Scripture"
+
 [connection signal="pressed" from="CharacterRow/CardYuri/VBox/ButtonYuri" to="." method="_on_button_yuri_pressed"]
 [connection signal="pressed" from="CharacterRow/CardRaph/VBox/ButtonRaph" to="." method="_on_button_raph_pressed"]
 [connection signal="pressed" from="CharacterRow/CardGabe/VBox/ButtonGabe" to="." method="_on_button_gabe_pressed"]
 [connection signal="pressed" from="CharacterRow/CardMike/VBox/ButtonMike" to="." method="_on_button_mike_pressed"]
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="ScriptureButton" to="." method="_on_scripture_button_pressed"]
