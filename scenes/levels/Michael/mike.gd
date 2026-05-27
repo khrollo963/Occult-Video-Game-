@@ -11,6 +11,9 @@ const ATTACK_DURATION := 0.25
 @onready var _game_manager: Node = get_node("/root/GameManager")
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_hitbox: Area2D = $AttackHitbox
+@onready var attack_hitbox_shape: CollisionShape2D = $AttackHitbox/CollisionShape2D
+
+const ATTACK_HITBOX_OFFSET_X := 36.0
 
 var health := max_health
 var attacking := false
@@ -59,6 +62,7 @@ func start_attack() -> void:
 	attack_timer = ATTACK_DURATION
 	var attack_dir := 1.0 if anim.flip_h else -1.0
 	velocity.x = attack_dir * ATTACK_LUNGE
+	attack_hitbox_shape.position.x = ATTACK_HITBOX_OFFSET_X * attack_dir
 	anim.play("attack")
 	attack_hitbox.monitoring = true
 

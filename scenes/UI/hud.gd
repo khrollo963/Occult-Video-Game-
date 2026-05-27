@@ -10,6 +10,7 @@ func _ready() -> void:
 	_game_manager.health_changed.connect(_on_health_changed)
 	_game_manager.score_changed.connect(_on_score_changed)
 	_game_manager.stat_changed.connect(_on_stat_changed)
+	_game_manager.apply_cached_hud(self)
 
 
 func set_health(current: int, maximum: int) -> void:
